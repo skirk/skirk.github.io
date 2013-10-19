@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://skirk.github.io/sitemap.xml 
