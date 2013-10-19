@@ -2,14 +2,22 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://skirk.github.io/robots.txt</loc>
-        <lastmod>2013-10-19T22:51:51+01:00</lastmod>
+        <lastmod>2013-10-19T23:04:01+01:00</lastmod>
     </url>
     <url>
         <loc>http://skirk.github.io/blog/archives/</loc>
-        <lastmod>2013-10-19T22:51:51+01:00</lastmod>
+        <lastmod>2013-10-19T23:04:01+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://skirk.github.io/blog/</loc>
+        <lastmod>2013-10-19T23:04:01+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://skirk.github.io/archives/</loc>
+        <lastmod>2013-10-19T23:04:01+01:00</lastmod>
     </url>
     <url>
         <loc>http://skirk.github.io/</loc>
-        <lastmod>2013-10-19T22:51:51+01:00</lastmod>
+        <lastmod>2013-10-19T23:04:01+01:00</lastmod>
     </url>
 </urlset>
