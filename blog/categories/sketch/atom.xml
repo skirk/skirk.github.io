@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Sketch | Tuomo's corner]]></title>
   <link href="http://skirk.github.io/blog/categories/sketch/atom.xml" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2014-04-30T23:53:54+01:00</updated>
+  <updated>2014-04-30T23:56:25+01:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -18,7 +18,7 @@
     <link href="http://skirk.github.io/blog/2014/04/30/basho/"/>
     <updated>2014-04-30T23:48:00+01:00</updated>
     <id>http://skirk.github.io/blog/2014/04/30/basho</id>
-    <content type="html"><![CDATA[<p><img src="images/basho.jpg"></p>
+    <content type="html"><![CDATA[<p><img src="/images/basho.jpg"></p>
 ]]></content>
   </entry>
   
