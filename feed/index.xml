@@ -4,7 +4,7 @@
   <title><![CDATA[Tuomo's corner]]></title>
   <link href="http://skirk.github.io/feed" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2014-05-05T06:00:07+01:00</updated>
+  <updated>2014-05-05T06:13:26+01:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -12,15 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[test]]></title>
-    <link href="http://skirk.github.io/blog/2014/05/05/test/"/>
-    <updated>2014-05-05T05:13:00+01:00</updated>
-    <id>http://skirk.github.io/blog/2014/05/05/test</id>
-    <content type="html"><![CDATA[<p><a href="http://skirk.github.io/images/post/basho.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/basho.jpg" alt="" /></a></p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[breathe]]></title>
