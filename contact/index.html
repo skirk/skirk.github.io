@@ -7,7 +7,7 @@
 
 	<meta name="author" content="Tuomo Rinne">
 
-<meta name="description" content="In case you want to get in touch, my email is open 24 hours 7 days a week: I have a twitter account as well. I use it mostly to follow cool guys like &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="In case you want to get in touch, my email is open 24 hours 7 days a week. I have a twitter account as well. I use it mostly to follow cool guys like &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -17,7 +17,36 @@
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	
+	<!-- Load jQuery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	jQuery.noConflict(); // ender.js conflicts with jQuery
+</script>
+<!-- Load FancyBox -->
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" />
+<script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+<!-- Fix FancyBox style for OctoPress -->
+<style type="text/css">
+  .fancybox-wrap { position: fixed !important; }
+  .fancybox-opened {
+    -webkit-border-radius: 4px !important;
+       -moz-border-radius: 4px !important;
+            border-radius: 4px !important;
+  }
+  .fancybox-close, .fancybox-prev span, .fancybox-next span {
+    background-color: transparent !important;
+    border: 0 !important;
+  }
+</style>
+
+<!-- Custom Scripts -->
+<script language="Javascript" type="text/javascript">
+	// ender.js gobbles jQuery's ready event: Use ender.js $ instead
+	$(document).ready(function() {
+		jQuery(".fancybox").fancybox();
+	});
+</script> 
+
 </head>
 
 
@@ -47,9 +76,9 @@
 </header>
 
 	<div id="content" class="inner"><article class="page">
-    <div class="entry-content"><p>In case you want to get in touch, my <a href="mailto:tuomo.rinne@gmail.com">email</a> is open 24 hours 7 days a week:</p>
+    <div class="entry-content"><p>In case you want to get in touch, my <a href="mailto:tuomo.rinne@gmail.com">email</a> is open 24 hours 7 days a week.</p>
 
-<p>I have a <a href="https://twitter.com/muotori">twitter</a> account as well. I use it mostly to follow cool guys like <a href="https://twitter.com/ID_AA_Carmack">John Carmack</a> and <a href="https://twitter.com/worrydream">Bret Victor</a>.</p>
+<p>I have a <a href="https://twitter.com/muotori">twitter account</a> as well. I use it mostly to follow cool guys like <a href="https://twitter.com/ID_AA_Carmack">John Carmack</a> and <a href="https://twitter.com/worrydream">Bret Victor</a>.</p>
 </div>
 </article>
 

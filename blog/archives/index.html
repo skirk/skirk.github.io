@@ -7,7 +7,7 @@
 
 	<meta name="author" content="Tuomo Rinne">
 
-<meta name="description" content=" 2014 breathe May 5 Calligraphy flower May 5 Traditional Printing basho poem Apr 30 Sketch guitarist Apr 30 Sketch 2013 Hello Blog Oct 19 "> <meta name="keywords" content="">
+<meta name="description" content=" 2014 test May 5 breathe May 5 Calligraphy flower May 5 Traditional Printing basho poem Apr 30 Sketch guitarist Apr 30 Sketch 2013 Hello Blog Oct 19 "> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -17,7 +17,36 @@
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	
+	<!-- Load jQuery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	jQuery.noConflict(); // ender.js conflicts with jQuery
+</script>
+<!-- Load FancyBox -->
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" />
+<script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+<!-- Fix FancyBox style for OctoPress -->
+<style type="text/css">
+  .fancybox-wrap { position: fixed !important; }
+  .fancybox-opened {
+    -webkit-border-radius: 4px !important;
+       -moz-border-radius: 4px !important;
+            border-radius: 4px !important;
+  }
+  .fancybox-close, .fancybox-prev span, .fancybox-next span {
+    background-color: transparent !important;
+    border: 0 !important;
+  }
+</style>
+
+<!-- Custom Scripts -->
+<script language="Javascript" type="text/javascript">
+	// ender.js gobbles jQuery's ready event: Use ender.js $ instead
+	$(document).ready(function() {
+		jQuery(".fancybox").fancybox();
+	});
+</script> 
+
 </head>
 
 
@@ -53,6 +82,21 @@
 	
 	
 	<section class="archives"><h2>2014</h1>
+
+<article>
+	<h3><a href="/blog/2014/05/05/test/">test</a></h3>
+	<div class="meta">
+		<span class="date">May  5</span>
+		<span class="tags">
+
+</span>
+	    
+	</div>
+</article>
+
+
+	
+
 
 <article>
 	<h3><a href="/blog/2014/05/05/breathe/">breathe</a></h3>

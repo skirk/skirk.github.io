@@ -4,7 +4,7 @@
   <title><![CDATA[Tuomo's corner]]></title>
   <link href="http://skirk.github.io/atom.xml" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2014-05-05T03:34:47+01:00</updated>
+  <updated>2014-05-05T06:00:07+01:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -13,11 +13,20 @@
 
   
   <entry>
+    <title type="html"><![CDATA[test]]></title>
+    <link href="http://skirk.github.io/blog/2014/05/05/test/"/>
+    <updated>2014-05-05T05:13:00+01:00</updated>
+    <id>http://skirk.github.io/blog/2014/05/05/test</id>
+    <content type="html"><![CDATA[<p><a href="http://skirk.github.io/images/post/basho.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/basho.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[breathe]]></title>
     <link href="http://skirk.github.io/blog/2014/05/05/breathe/"/>
     <updated>2014-05-05T02:05:00+01:00</updated>
     <id>http://skirk.github.io/blog/2014/05/05/breathe</id>
-    <content type="html"><![CDATA[<p><img src="http://skirk.github.io/images/breathe.jpg"></p>
+    <content type="html"><![CDATA[<p><a href="http://skirk.github.io/images/post/breathe.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/breathe.jpg" alt="" /></a></p>
 ]]></content>
   </entry>
   
@@ -26,7 +35,7 @@
     <link href="http://skirk.github.io/blog/2014/05/05/flower/"/>
     <updated>2014-05-05T02:03:00+01:00</updated>
     <id>http://skirk.github.io/blog/2014/05/05/flower</id>
-    <content type="html"><![CDATA[<p><img src="http://skirk.github.io/images/flower.jpg"></p>
+    <content type="html"><![CDATA[<p><a href="http://skirk.github.io/images/post/flower.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/flower.jpg" alt="" /></a></p>
 ]]></content>
   </entry>
   
@@ -35,7 +44,7 @@
     <link href="http://skirk.github.io/blog/2014/04/30/basho/"/>
     <updated>2014-04-30T23:48:00+01:00</updated>
     <id>http://skirk.github.io/blog/2014/04/30/basho</id>
-    <content type="html"><![CDATA[<p><img src="http://skirk.github.io/images/basho.jpg"></p>
+    <content type="html"><![CDATA[<p><a href="http://skirk.github.io/images/post/basho.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/basho.jpg" alt="" /></a></p>
 ]]></content>
   </entry>
   
@@ -44,7 +53,7 @@
     <link href="http://skirk.github.io/blog/2014/04/30/drawing1/"/>
     <updated>2014-04-30T23:30:00+01:00</updated>
     <id>http://skirk.github.io/blog/2014/04/30/drawing1</id>
-    <content type="html"><![CDATA[<p><img src="http://skirk.github.io/images/guitaristsmall.jpg"></p>
+    <content type="html"><![CDATA[<p><a href="http://skirk.github.io/images/post/guitaristsmall.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/guitaristsmall.jpg" alt="" /></a></p>
 ]]></content>
   </entry>
   
