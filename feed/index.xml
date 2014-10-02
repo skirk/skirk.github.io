@@ -4,7 +4,7 @@
   <title><![CDATA[Tuomo's corner]]></title>
   <link href="http://skirk.github.io/feed" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2014-10-02T20:38:53+01:00</updated>
+  <updated>2014-10-02T20:41:11+01:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -54,7 +54,7 @@ The problem: If there is a factory method that returns a shared pointer to an ob
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The line <em>11</em> is the crown jewel. Unfortunately, currently there is no way to transfer Standard Template Library shared pointers in such way. Therefore, unless one is willing to same functionality for the STL version, they are a no go. In my work I decided to go change my pointers to boost equivalents because of this. Ah, the laziness.</p>
+<p>The line <em>11</em> is the crown jewel. Unfortunately, currently there is no way to transfer Standard Template Library shared pointers in such way. Therefore, unless one is willing to add the same functionality for the STL version, they are a no go. In my work I decided to go change my pointers to boost equivalents because of this. Ah, the laziness.</p>
 ]]></content>
   </entry>
   
