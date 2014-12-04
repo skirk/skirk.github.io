@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C&P, | Tuomo's corner]]></title>
   <link href="http://skirk.github.io/blog/categories/c-and-p/atom.xml" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2014-12-04T02:16:04+00:00</updated>
+  <updated>2014-12-04T02:39:57+00:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -40,9 +40,9 @@
 
 <h2>References</h2>
 
-<p><ol class="bibliography"><li>{{reference}}</li>
-<li>{{reference}}</li>
-<li>{{reference}}</li></ol></p>
+<p><ol class="bibliography"><li><span id="lockfree">Fraser, K. (2004). <i>Practical lock-freedom</i>. Retrieved from http://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-579.pdf</span></li>
+<li><span id="Cormen">Cormen, T. H., Stein, C., Rivest, R. L., &#38; Leiserson, C. E. (2001). <i>Introduction to Algorithms</i> (2 ed.). McGraw-Hill Higher Education.</span></li>
+<li><span id="Kerrisk">Kerrisk, M. (2010). <i>The Linux Programming Interface: A Linux and UNIX System Programming Handbook</i> (1 ed.). San Francisco, CA, USA: No Starch Press.</span></li></ol></p>
 ]]></content>
   </entry>
   
