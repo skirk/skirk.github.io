@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C&P, | Tuomo's corner]]></title>
+  <link href="http://skirk.github.io/blog/categories/c-and-p/atom.xml" rel="self"/>
+  <link href="http://skirk.github.io/"/>
+  <updated>2014-12-04T01:43:59+00:00</updated>
+  <id>http://skirk.github.io/</id>
+  <author>
+    <name><![CDATA[Tuomo Rinne]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Concurrency & Parallelism -  locks ]]></title>
+    <link href="http://skirk.github.io/blog/2014/12/03/software-transactional-memory/"/>
+    <updated>2014-12-03T16:51:00+00:00</updated>
+    <id>http://skirk.github.io/blog/2014/12/03/software-transactional-memory</id>
+    <content type="html"><![CDATA[<p>On my path to nirvana, I decided to detour to learn threading and concurrency. In this Concurrency &amp; Parallelism series I&rsquo;ll go through some fundamental concepts that is involved. Most of the information (that will be ) presented in the series is new information for me. Therefore, the act of writing will work as my parser which formats the information in sensible manner. Hopefully this will be useful for someone else as well.</p>
+
+<h2>Basic Synchronization</h2>
+
+<p>The usual solution to conduct interprocess synchronization is to use lock-based solutions such as <em>mutexes</em> where certain shared data elements are locked in mutually exclusive manner. The shared variable modifiable by multitude of threads is <em>locked</em> until a thread stops modifying the data. When finished the data is <em>unlocked</em>.</p>
+
+<p> Another synchronization primitive is a <em>semaphore</em>. The semaphore is an integer value  which either grants or denies access to a shared variable. The semaphore is initiated with an absolute value, usually 0. When a process or a thread comes across a semaphore, a subtraction of 1 is taken from the value. If the value is negative, the process waits until a kernel grants it an access over the semaphore. Meanwhile a process waits for a unlock, another process has to add one to the semaphore to grant access for the waiting process.</p>
+
+<p>Generally, mutexes are preferred over semaphores, because they enforce better code structure. Only single thread can lock and unlock mutex, whereas one thread can decrement semaphore and another increment <a href="#Kerrisk">(Kerrisk, 2010)</a>. Mutex and semaphore are collectively called <em>locks</em>. Using locks for synchronization has several problems:</p>
+
+<p>One of them is <em>deadlock</em>, which is fairly easy to come across. The below image demonstrates 3 time steps, in which deadlock is achieved with two concurrent threads. Both of these threads will remain blocked indefinitely.</p>
+
+<p><img src="/images/deadlock.svg"></p>
+
+<p>A kernel scheduler can also interrupt thread execution, in a case where an higher-priority process starts executing on a thread instead. This is called <em>priority inversion</em>.</p>
+
+<p>Lastly, <em>convoying</em> of processes occur, in which a <em>convoy</em> of processes queue at a sequence of locks <a href="#lockfree">(Fraser, 2004)</a>.</p>
+
+<p>In the next post, I will look into lock-free synchronization.</p>
+
+<h2>References</h2>
+
+<p><ol class="bibliography"><li>{{reference}}</li>
+<li>{{reference}}</li>
+<li>{{reference}}</li></ol></p>
+]]></content>
+  </entry>
+  
+</feed>
