@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Traditional Printing | Tuomo's corner]]></title>
   <link href="http://skirk.github.io/blog/categories/traditional-printing/atom.xml" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2014-12-04T02:47:53+00:00</updated>
+  <updated>2014-12-04T02:51:52+00:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -18,7 +18,7 @@
     <link href="http://skirk.github.io/blog/2014/05/05/flower/"/>
     <updated>2014-05-05T02:03:00+01:00</updated>
     <id>http://skirk.github.io/blog/2014/05/05/flower</id>
-    <content type="html"><![CDATA[<p>{%photo /images/post/flower.jpg /images/post/thumb/flower.jpg %}</p>
+    <content type="html"><![CDATA[<p><a href="/images/post/flower.jpg" class="fancybox" title=""><img src="/images/post/thumb/flower.jpg" alt="" /></a></p>
 ]]></content>
   </entry>
   

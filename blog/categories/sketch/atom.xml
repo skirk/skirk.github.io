@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Sketch | Tuomo's corner]]></title>
   <link href="http://skirk.github.io/blog/categories/sketch/atom.xml" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2014-12-04T02:47:53+00:00</updated>
+  <updated>2014-12-04T02:51:52+00:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -18,7 +18,7 @@
     <link href="http://skirk.github.io/blog/2014/04/30/basho/"/>
     <updated>2014-04-30T23:48:00+01:00</updated>
     <id>http://skirk.github.io/blog/2014/04/30/basho</id>
-    <content type="html"><![CDATA[<p>{%photo /images/post/basho.jpg /images/post/thumb/basho.jpg %}</p>
+    <content type="html"><![CDATA[<p><a href="/images/post/basho.jpg" class="fancybox" title=""><img src="/images/post/thumb/basho.jpg" alt="" /></a></p>
 ]]></content>
   </entry>
   
@@ -27,7 +27,7 @@
     <link href="http://skirk.github.io/blog/2014/04/30/drawing1/"/>
     <updated>2014-04-30T23:30:00+01:00</updated>
     <id>http://skirk.github.io/blog/2014/04/30/drawing1</id>
-    <content type="html"><![CDATA[<p>{%photo /images/post/guitaristsmall.jpg /images/post/thumb/guitaristsmall.jpg %}</p>
+    <content type="html"><![CDATA[<p><a href="/images/post/guitaristsmall.jpg" class="fancybox" title=""><img src="/images/post/thumb/guitaristsmall.jpg" alt="" /></a></p>
 ]]></content>
   </entry>
   
