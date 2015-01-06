@@ -4,7 +4,7 @@
   <title><![CDATA[Tuomo's corner]]></title>
   <link href="http://skirk.github.io/feed" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2015-01-06T00:42:39+00:00</updated>
+  <updated>2015-01-06T00:44:33+00:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -181,10 +181,12 @@ I got a piece of code that creates an .obj file that I want to open in Maya. You
 First up open terminal and type:
 
 ``` bash
-	echo "commandPort -n ":2222";" > ~/maya/2014-x64/scripts/userSetup.mel
+	echo 'commandPort -n ":2222";' > ~/maya/2014-x64/scripts/userSetup.mel
 &#8220;`
 
-This will make maya listen to a port 2222 into which we can pass in some commands. After this we need few scripts: 
+This will make maya listen to a port 2222 into which we can pass in some commands. After this we need few scripts.
+Here&#8217;s a script that I call *mayain*, this is a python script that takes in standard input and sends that to the 2222 port.
+
 
 &#8220;` python 
 import socket
@@ -202,7 +204,7 @@ s.send(MESSAGE)
 s.close()
 &#8220;`
 
-here&#8217;s a script that I call *mayain*, this is a python script that takes in standard input and sends that to the 2222 port.
+Then there&#8217;s a bash script called *importstring*, this script either takes an file name as an command line argument or standard input, and creates a mel command out of it that imports objs into maya.
 
 &#8220;` bash 
 #!/bin/bash
@@ -217,7 +219,7 @@ else
 fi
 &#8220;`
 
-Then there&#8217;s a bash script called *importstring*, this script either takes an file name as an command line argument or standard input, and creates a mel command out of it that imports objs into maya.
+
 Create a folder ~/bin/:
 
 &#8220;` bash
@@ -225,8 +227,7 @@ mkdir ~/bin
 &#8220;`
 
 
-
-and uncompress the zip to that folder. The folder should contain now a addtolibrary(see second tip) file as well as a folder mayautils that contains mayain and importstring files.
+and move the files to that folder. The folder should contain now a addtolibrary(see second tip) file as well as a folder mayautils that contains mayain and importstring files.
 Let&#8217;s make sure they are executable by running:
 
 &#8220;` bash

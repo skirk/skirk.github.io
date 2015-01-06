@@ -70,10 +70,12 @@ I got a piece of code that creates an .obj file that I want to open in Maya. You
 First up open terminal and type:
 
 ``` bash
-	echo "commandPort -n ":2222";" > ~/maya/2014-x64/scripts/userSetup.mel
+	echo 'commandPort -n ":2222";' > ~/maya/2014-x64/scripts/userSetup.mel
 ```
 
-This will make maya listen to a port 2222 into which we can pass in some commands. After this we need few scripts: 
+This will make maya listen to a port 2222 into which we can pass in some commands. After this we need few scripts.
+Here's a script that I call *mayain*, this is a python script that takes in standard input and sends that to the 2222 port.
+
 
 ``` python 
 import socket
@@ -91,7 +93,7 @@ s.send(MESSAGE)
 s.close()
 ```
 
-here's a script that I call *mayain*, this is a python script that takes in standard input and sends that to the 2222 port.
+Then there's a bash script called *importstring*, this script either takes an file name as an command line argument or standard input, and creates a mel command out of it that imports objs into maya.
 
 ``` bash 
 #!/bin/bash
@@ -106,7 +108,7 @@ else
 fi
 ```
 
-Then there's a bash script called *importstring*, this script either takes an file name as an command line argument or standard input, and creates a mel command out of it that imports objs into maya.
+
 Create a folder ~/bin/:
 
 ``` bash
@@ -114,8 +116,7 @@ mkdir ~/bin
 ```
 
 
-
-and uncompress the zip to that folder. The folder should contain now a addtolibrary(see second tip) file as well as a folder mayautils that contains mayain and importstring files.
+and move the files to that folder. The folder should contain now a addtolibrary(see second tip) file as well as a folder mayautils that contains mayain and importstring files.
 Let's make sure they are executable by running:
 
 ``` bash
