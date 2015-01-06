@@ -4,7 +4,7 @@
   <title><![CDATA[Category: University, | Tuomo's corner]]></title>
   <link href="http://skirk.github.io/blog/categories/university/atom.xml" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2015-01-06T00:32:53+00:00</updated>
+  <updated>2015-01-06T00:44:33+00:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Meshing tip]]></title>
-    <link href="http://skirk.github.io/blog/2014/05/07/the-medic/"/>
+    <link href="http://skirk.github.io/blog/2014/05/07/meshing/"/>
     <updated>2014-05-07T08:09:00+01:00</updated>
-    <id>http://skirk.github.io/blog/2014/05/07/the-medic</id>
+    <id>http://skirk.github.io/blog/2014/05/07/meshing</id>
     <content type="html"><![CDATA[<p>Few people in University are working with meshes so I was asked to write an email about workflow optimizations that I found useful. This is the email more or less. I&rsquo;m myself mostly working on commandline but I&rsquo;ve included how to set up a qtcreator as well.</p>
 
 <p>Here we go:</p>
@@ -28,12 +28,13 @@
 
 <p>``` bash</p>
 
-<pre><code>echo "commandPort -n ":2222";" &gt; ~/maya/2014-x64/scripts/userSetup.mel
+<pre><code>echo 'commandPort -n ":2222";' &gt; ~/maya/2014-x64/scripts/userSetup.mel
 </code></pre>
 
 <p>```</p>
 
-<p>This will make maya listen to a port 2222 into which we can pass in some commands. After this we need few scripts:</p>
+<p>This will make maya listen to a port 2222 into which we can pass in some commands. After this we need few scripts.
+Here&rsquo;s a script that I call <em>mayain</em>, this is a python script that takes in standard input and sends that to the 2222 port.</p>
 
 <p>``` python
 import socket
@@ -54,7 +55,7 @@ s.send(MESSAGE)
 s.close()
 ```</p>
 
-<p>here&rsquo;s a script that I call <em>mayain</em>, this is a python script that takes in standard input and sends that to the 2222 port.</p>
+<p>Then there&rsquo;s a bash script called <em>importstring</em>, this script either takes an file name as an command line argument or standard input, and creates a mel command out of it that imports objs into maya.</p>
 
 <p>``` bash</p>
 
@@ -77,14 +78,13 @@ then</p>
 <p>fi
 ```</p>
 
-<p>Then there&rsquo;s a bash script called <em>importstring</em>, this script either takes an file name as an command line argument or standard input, and creates a mel command out of it that imports objs into maya.
-Create a folder ~/bin/:</p>
+<p>Create a folder ~/bin/:</p>
 
 <p><code>bash
 mkdir ~/bin
 </code></p>
 
-<p>and uncompress the zip to that folder. The folder should contain now a addtolibrary(see second tip) file as well as a folder mayautils that contains mayain and importstring files.
+<p>and move the files to that folder. The folder should contain now a addtolibrary(see second tip) file as well as a folder mayautils that contains mayain and importstring files.
 Let&rsquo;s make sure they are executable by running:</p>
 
 <p>``` bash</p>

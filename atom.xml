@@ -4,7 +4,7 @@
   <title><![CDATA[Tuomo's corner]]></title>
   <link href="http://skirk.github.io/atom.xml" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2015-01-06T00:32:53+00:00</updated>
+  <updated>2015-01-06T00:42:39+00:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -169,153 +169,120 @@
   
   <entry>
     <title type="html"><![CDATA[Meshing tip]]></title>
-    <link href="http://skirk.github.io/blog/2014/05/07/the-medic/"/>
+    <link href="http://skirk.github.io/blog/2014/05/07/meshing/"/>
     <updated>2014-05-07T08:09:00+01:00</updated>
-    <id>http://skirk.github.io/blog/2014/05/07/the-medic</id>
-    <content type="html"><![CDATA[<p>Few people in University are working with meshes so I was asked to write an email about workflow optimizations that I found useful. This is the email more or less. I&rsquo;m myself mostly working on commandline but I&rsquo;ve included how to set up a qtcreator as well.</p>
+    <id>http://skirk.github.io/blog/2014/05/07/meshing</id>
+    <content type="html"><![CDATA[Few people in University are working with meshes so I was asked to write an email about workflow optimizations that I found useful. This is the email more or less. I'm myself mostly working on commandline but I've included how to set up a qtcreator as well.
 
-<p>Here we go:</p>
+Here we go:
 
-<p>I got a piece of code that creates an .obj file that I want to open in Maya. You can fire up Maya and go and look for the file through bunch of submenus and whatnot. If you got to this a lot it gets annoying quite quickly. Wouldn&rsquo;t it be awesome if Maya just automatically loaded up your file? Here&rsquo;s how:</p>
+I got a piece of code that creates an .obj file that I want to open in Maya. You can fire up Maya and go and look for the file through bunch of submenus and whatnot. If you got to this a lot it gets annoying quite quickly. Wouldn't it be awesome if Maya just automatically loaded up your file? Here's how:
 
-<p>First up open terminal and type:</p>
+First up open terminal and type:
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">echo</span> <span class="s2">&quot;commandPort -n &quot;</span>:2222<span class="s2">&quot;;&quot;</span> &gt; ~/maya/2014-x64/scripts/userSetup.mel
-</span></code></pre></td></tr></table></div></figure>
+``` bash
+	echo "commandPort -n ":2222";" > ~/maya/2014-x64/scripts/userSetup.mel
+&#8220;`
 
+This will make maya listen to a port 2222 into which we can pass in some commands. After this we need few scripts: 
 
-<p>This will make maya listen to a port 2222 into which we can pass in some commands. After this we need few scripts:</p>
+&#8220;` python 
+import socket
+import sys
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">socket</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">sys</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">TCP_IP</span> <span class="o">=</span> <span class="s">&#39;127.0.0.1&#39;</span>
-</span><span class='line'><span class="n">TCP_PORT</span> <span class="o">=</span> <span class="mi">2222</span>
-</span><span class='line'><span class="n">BUFFER_SIZE</span> <span class="o">=</span> <span class="mi">1024</span>
-</span><span class='line'><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">MESSAGE</span> <span class="o">=</span> <span class="n">line</span>
-</span><span class='line'>    <span class="k">print</span> <span class="n">MESSAGE</span>
-</span><span class='line'><span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
-</span><span class='line'><span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">TCP_IP</span><span class="p">,</span> <span class="n">TCP_PORT</span><span class="p">))</span>
-</span><span class='line'><span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">MESSAGE</span><span class="p">)</span>
-</span><span class='line'><span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
+TCP_IP = &#8216;127.0.0.1&#8217;
+TCP_PORT = 2222
+BUFFER_SIZE = 1024
+for line in sys.stdin:
+    MESSAGE = line
+    print MESSAGE
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((TCP_IP, TCP_PORT))
+s.send(MESSAGE)
+s.close()
+&#8220;`
 
+here&#8217;s a script that I call *mayain*, this is a python script that takes in standard input and sends that to the 2222 port.
 
-<p>here&rsquo;s a script that I call <em>mayain</em>, this is a python script that takes in standard input and sends that to the 2222 port.</p>
+&#8220;` bash 
+#!/bin/bash
+if [ -z &#8220;$1&#8221; ]
+then
+        read objname
+        objabs=$(readlink -f $objname)
+        echo &#8216;file -import -type &#8220;OBJ&#8221; -ra true -options &#8220;mo=2;lo=0&#8221;  -pr -loadReferenceDepth &#8220;all&#8221; &#8220;&#8217;$objabs&#8217;&#8221;;&#8217;
+else
+        objabs=$(readlink -f $1)
+        echo &#8216;file -import -type &#8220;OBJ&#8221; -ra true -options &#8220;mo=2;lo=0&#8221;  -pr -loadReferenceDepth &#8220;all&#8221; &#8220;&#8217;$objabs&#8217;&#8221;;&#8217;
+fi
+&#8220;`
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$1&quot;</span> <span class="o">]</span>
-</span><span class='line'><span class="k">then</span>
-</span><span class='line'><span class="k">        </span><span class="nb">read </span>objname
-</span><span class='line'>        <span class="nv">objabs</span><span class="o">=</span><span class="k">$(</span>readlink -f <span class="nv">$objname</span><span class="k">)</span>
-</span><span class='line'>        <span class="nb">echo</span> <span class="s1">&#39;file -import -type &quot;OBJ&quot; -ra true -options &quot;mo=2;lo=0&quot;  -pr -loadReferenceDepth &quot;all&quot; &quot;&#39;</span><span class="nv">$objabs</span><span class="s1">&#39;&quot;;&#39;</span>
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'><span class="k">        </span><span class="nv">objabs</span><span class="o">=</span><span class="k">$(</span>readlink -f <span class="nv">$1</span><span class="k">)</span>
-</span><span class='line'>        <span class="nb">echo</span> <span class="s1">&#39;file -import -type &quot;OBJ&quot; -ra true -options &quot;mo=2;lo=0&quot;  -pr -loadReferenceDepth &quot;all&quot; &quot;&#39;</span><span class="nv">$objabs</span><span class="s1">&#39;&quot;;&#39;</span>
-</span><span class='line'><span class="k">fi</span>
-</span></code></pre></td></tr></table></div></figure>
+Then there&#8217;s a bash script called *importstring*, this script either takes an file name as an command line argument or standard input, and creates a mel command out of it that imports objs into maya.
+Create a folder ~/bin/:
+
+&#8220;` bash
+mkdir ~/bin
+&#8220;`
 
 
-<p>Then there&rsquo;s a bash script called <em>importstring</em>, this script either takes an file name as an command line argument or standard input, and creates a mel command out of it that imports objs into maya.
-Create a folder ~/bin/:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir ~/bin
-</span></code></pre></td></tr></table></div></figure>
+and uncompress the zip to that folder. The folder should contain now a addtolibrary(see second tip) file as well as a folder mayautils that contains mayain and importstring files.
+Let&#8217;s make sure they are executable by running:
 
+&#8220;` bash
+	chmod +x ~/bin/mayautils/*
+&#8220;`
 
-<p>and uncompress the zip to that folder. The folder should contain now a addtolibrary(see second tip) file as well as a folder mayautils that contains mayain and importstring files.
-Let&rsquo;s make sure they are executable by running:</p>
+One step more and we are ready to test it out:
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>chmod +x ~/bin/mayautils/*
-</span></code></pre></td></tr></table></div></figure>
+&#8220;` bash
+	echo &#8220;export PATH=$PATH:~/bin/mayautils&#8221; >> ~/.bashrc
+	source ~/.bashrc
+&#8220;`
 
+With PATH variable it&#8217;s good idea to be careful as it can mess up all kinds of stuff if it&#8217;s wrongly setup.
+Make sure the mayautils folder doesn&#8217;t contain anything else than two scripts.
+Also make sure to use &#8216;>>&#8217; instead of &#8216;>&#8217;, otherwise you&#8217;ll overwrite your .bashrc file.
 
-<p>One step more and we are ready to test it out:</p>
+Now if you have an .obj file, you should be able to do:
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">echo</span> <span class="s2">&quot;export PATH=$PATH:~/bin/mayautils&quot;</span> &gt;&gt; ~/.bashrc
-</span><span class='line'><span class="nb">source</span> ~/.bashrc
-</span></code></pre></td></tr></table></div></figure>
+&#8220;` bash
+	importstring test.obj | mayain
+&#8220;`
 
+and your obj should be showing up in maya. (Maya has to be running before the executing this)
+Ok, cool, if your program uses standard output to print out a obj file name in terminal you can do:
 
-<p>With PATH variable it&rsquo;s good idea to be careful as it can mess up all kinds of stuff if it&rsquo;s wrongly setup.
-Make sure the mayautils folder doesn&rsquo;t contain anything else than two scripts.
-Also make sure to use &lsquo;>>&rsquo; instead of &lsquo;>&rsquo;, otherwise you&rsquo;ll overwrite your .bashrc file.</p>
+&#8220;` bash
+	./application | importstring | mayain 
+&#8220;`
 
-<p>Now if you have an .obj file, you should be able to do:</p>
+or if it just creates an .obj file without printing out the name you can do:
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>importstring test.obj | mayain
-</span></code></pre></td></tr></table></div></figure>
+&#8220;` bash
+	./application && importstring <name>.obj | mayain
+&#8220;`
 
+*Note && means the next command is executed AFTER application so if you got a GUI elements they need to be closed before importstring is executed. With a single & the importstring is executed straight after the application is fired up, but this might happen before your application has finished meshing*
 
-<p>and your obj should be showing up in maya. (Maya has to be running before the executing this)
-Ok, cool, if your program uses standard output to print out a obj file name in terminal you can do:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>./application | importstring | mayain
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>or if it just creates an .obj file without printing out the name you can do:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>./application <span class="o">&amp;&amp;</span> importstring &lt;name&gt;.obj | mayain
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>Note &amp;&amp; means the next command is executed AFTER application so if you got a GUI elements they need to be closed before importstring is executed. With a single &amp; the importstring is executed straight after the application is fired up, but this might happen before your application has finished meshing</em></p>
-
-<p>Okay, so all is good if you are just in terminal, but if you are developing in qtcreator it might be inconvenient to go to terminal to run these command.
+Okay, so all is good if you are just in terminal, but if you are developing in qtcreator it might be inconvenient to go to terminal to run these command.
 We can modify the run command a bit to link qtcreator to the hoop as well.
-Once you have your qtcreator project open go to &ldquo;Projects&rdquo; tab in the left hand side. Then under &ldquo;Desktop&rdquo; at the top there&rsquo;s a &ldquo;Run&rdquo; tab.
-Once Run tab is open add either:</p>
+Once you have your qtcreator project open go to &#8220;Projects&#8221; tab in the left hand side. Then under &#8220;Desktop&#8221; at the top there&#8217;s a &#8220;Run&#8221; tab.
+Once Run tab is open add either:
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>| importstring | mayain
-</span></code></pre></td></tr></table></div></figure>
+&#8220;` bash
+| importstring | mayain
+&#8220;` 
 
+or
 
-<p></p>
+&#8220;` bash
+&& importstring test.obj | mayain
+&#8220;`
 
-<p>or</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">&amp;&amp;</span> importstring test.obj | mayain
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>to the Arguments line. Also check out in the Run Environment that the PATH variable contains &ldquo;:~/bin/mayautils&rdquo;, if that&rsquo;s not the case you can add it to in qtcreator by clicking Edit.
+to the Arguments line. Also check out in the Run Environment that the PATH variable contains &#8220;:~/bin/mayautils&#8221;, if that&#8217;s not the case you can add it to in qtcreator by clicking Edit.
 Now whenever you run your app these commands are run and you should see your objects being displayed in Maya automatically.
-Remember that you have to close your app before the objects show up. You can of course open sockets in your c++ program and send commands from that if you need even more interactive feedback but I&rsquo;m not going to go into that.</p>
+Remember that you have to close your app before the objects show up. You can of course open sockets in your c++ program and send commands from that if you need even more interactive feedback but I&#8217;m not going to go into that.
 ]]></content>
   </entry>
   

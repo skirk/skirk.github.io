@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Calligraphy | Tuomo's corner]]></title>
   <link href="http://skirk.github.io/blog/categories/calligraphy/atom.xml" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2015-01-06T00:32:53+00:00</updated>
+  <updated>2015-01-06T00:44:33+00:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -18,7 +18,7 @@
     <link href="http://skirk.github.io/blog/2014/05/05/breathe/"/>
     <updated>2014-05-05T02:05:00+01:00</updated>
     <id>http://skirk.github.io/blog/2014/05/05/breathe</id>
-    <content type="html"><![CDATA[<p><a href="/images/post/breathe.jpg" class="fancybox" title=""><img src="/images/post/thumb/breathe.jpg" alt="" /></a></p>
+    <content type="html"><![CDATA[<p>{%photo /images/post/breathe.jpg /images/post/thumb/breathe.jpg %}</p>
 ]]></content>
   </entry>
   
