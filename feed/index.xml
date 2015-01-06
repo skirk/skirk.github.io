@@ -4,7 +4,7 @@
   <title><![CDATA[Tuomo's corner]]></title>
   <link href="http://skirk.github.io/feed" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2014-12-04T02:51:52+00:00</updated>
+  <updated>2015-01-06T00:32:53+00:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -12,6 +12,127 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Plants with Haskell]]></title>
+    <link href="http://skirk.github.io/blog/2015/01/05/plants-with-haskell/"/>
+    <updated>2015-01-05T23:23:00+00:00</updated>
+    <id>http://skirk.github.io/blog/2015/01/05/plants-with-haskell</id>
+    <content type="html"><![CDATA[<p>To fill the void in my life I decided to look into new programming language. From afar haskell seemed like a funky language so off I went! As an exercise I picked up something I conceptually simple: L-systems.</p>
+
+<p>My first take was more or less as I would have approached the problem with imperative languages. It&rsquo;s quite nice and neat to produce the lsystem string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- Different types of nodes</span>
+</span><span class='line'><span class="kr">data</span> <span class="kt">LNode</span> <span class="ow">=</span> <span class="kt">Draw</span> <span class="o">|</span> <span class="kt">TLeft</span> <span class="o">|</span> <span class="kt">TRight</span> <span class="o">|</span> <span class="kt">Push</span> <span class="o">|</span> <span class="kt">Pop</span> <span class="o">|</span> <span class="kt">PHolder</span>
+</span><span class='line'><span class="c1">-- Rules for creating new strings</span>
+</span><span class='line'><span class="nf">become</span> <span class="kt">PHolder</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">Draw</span><span class="p">,</span> <span class="kt">TLeft</span> <span class="p">,</span><span class="kt">Push</span><span class="p">,</span> <span class="kt">Push</span><span class="p">,</span> <span class="kt">PHolder</span><span class="p">,</span>
+</span><span class='line'>        <span class="kt">Pop</span><span class="p">,</span> <span class="kt">TRight</span><span class="p">,</span> <span class="kt">PHolder</span><span class="p">,</span> <span class="kt">Pop</span><span class="p">,</span> <span class="kt">TRight</span><span class="p">,</span>
+</span><span class='line'>        <span class="kt">Draw</span><span class="p">,</span> <span class="kt">Push</span><span class="p">,</span> <span class="kt">TRight</span><span class="p">,</span> <span class="kt">Draw</span><span class="p">,</span> <span class="kt">PHolder</span><span class="p">,</span>
+</span><span class='line'>                  <span class="kt">Pop</span><span class="p">,</span> <span class="kt">TLeft</span><span class="p">,</span><span class="kt">PHolder</span><span class="p">]</span>
+</span><span class='line'><span class="nf">become</span> <span class="kt">Draw</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">Draw</span><span class="p">,</span> <span class="kt">Draw</span><span class="p">]</span>
+</span><span class='line'><span class="nf">become</span> <span class="n">n</span> <span class="ow">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">recurse</span> <span class="ow">::</span> <span class="p">[</span><span class="kt">LNode</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="kt">LNode</span><span class="p">]</span>
+</span><span class='line'><span class="nf">recurse</span> <span class="n">ns</span> <span class="n">i</span>
+</span><span class='line'>  <span class="o">|</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">=</span> <span class="n">recurse</span> <span class="p">(</span><span class="n">concatMap</span> <span class="n">become</span> <span class="n">ns</span><span class="p">)</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">|</span> <span class="n">otherwise</span> <span class="ow">=</span> <span class="n">ns</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To draw the tree:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">foreach</span> <span class="p">(</span><span class="n">recurse</span> <span class="p">[</span><span class="kt">PHolder</span><span class="p">]</span> <span class="mi">6</span><span class="p">)</span> <span class="o">$</span> <span class="nf">\</span> <span class="n">x</span> <span class="ow">-&gt;</span>
+</span><span class='line'>  <span class="kr">do</span> <span class="n">drawNode</span> <span class="n">x</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">-- Drawing function for each node</span>
+</span><span class='line'><span class="nf">drawNode</span> <span class="kt">Draw</span>  <span class="ow">=</span> <span class="kr">do</span>
+</span><span class='line'>    <span class="kt">C</span><span class="o">.</span><span class="n">rectangle</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.06</span><span class="p">)</span> <span class="mi">0</span> <span class="mf">0.12</span> <span class="mf">0.25</span>
+</span><span class='line'>      <span class="kt">C</span><span class="o">.</span><span class="n">translate</span> <span class="mi">0</span> <span class="mf">0.25</span>
+</span><span class='line'><span class="nf">drawNode</span> <span class="kt">TLeft</span>  <span class="ow">=</span> <span class="kt">C</span><span class="o">.</span><span class="n">transform</span> <span class="o">$</span>  <span class="n">rotate2d</span> <span class="p">(</span><span class="o">-</span><span class="n">pi</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span>
+</span><span class='line'><span class="nf">drawNode</span> <span class="kt">TRight</span>  <span class="ow">=</span> <span class="kt">C</span><span class="o">.</span><span class="n">transform</span> <span class="o">$</span> <span class="n">rotate2d</span>  <span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span>
+</span><span class='line'><span class="nf">drawNode</span> <span class="kt">Pop</span> <span class="ow">=</span>  <span class="kt">C</span><span class="o">.</span><span class="n">restore</span>
+</span><span class='line'><span class="nf">drawNode</span> <span class="kt">Push</span> <span class="ow">=</span>  <span class="kt">C</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'><span class="nf">drawNode</span> <span class="kt">PHolder</span> <span class="ow">=</span> <span class="kt">C</span><span class="o">.</span><span class="n">rectangle</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A result of this:
+<a href="http://skirk.github.io/images/post/basicbush.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/basicbushthumb.jpg" alt="" /></a></p>
+
+<p>Even though the code is fairly neat, the code bugged me because it looked almost like C code. That&rsquo;s not acceptable! This is functional programming afterall. In the next approach I did a bit research and found an <a href="http://fhtr.blogspot.fi/2008/12/drawing-tree-with-haskell-and-cairo.html">article</a> (Man, that dude has pretty code, check it out!) that had something I wanted to do. So I took creative license and modified some of the stuff to create an tDOL-system <a href="#botanic">(Prusinkiewicz &#38; Lindenmayer, 1996)</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">trunk</span> <span class="n">n</span> <span class="n">angle</span>
+</span><span class='line'>      <span class="o">|</span>  <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span>  <span class="ow">=</span> <span class="kt">[]</span>
+</span><span class='line'>      <span class="o">|</span>  <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="ow">=</span> <span class="p">[(</span><span class="n">wtgf</span> <span class="n">n</span><span class="p">,</span> <span class="n">map</span> <span class="p">(</span><span class="n">rotateP</span> <span class="n">angle</span><span class="p">)</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tgf</span> <span class="n">n</span><span class="p">)])]</span>
+</span><span class='line'>      <span class="o">|</span>  <span class="n">otherwise</span>  <span class="ow">=</span> <span class="p">(</span><span class="n">thickness</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span> <span class="kt">:</span> <span class="n">evolve</span>
+</span><span class='line'>          <span class="kr">where</span>
+</span><span class='line'>              <span class="n">points</span> <span class="ow">=</span> <span class="n">map</span> <span class="p">(</span><span class="n">rotateP</span> <span class="n">angle</span><span class="p">)</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">igf</span> <span class="n">n</span><span class="p">)]</span>
+</span><span class='line'>              <span class="n">thickness</span> <span class="ow">=</span> <span class="n">wigf</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>              <span class="p">[</span><span class="kr">_</span><span class="p">,(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)]</span> <span class="ow">=</span> <span class="n">points</span>
+</span><span class='line'>              <span class="n">evolve</span> <span class="ow">=</span> <span class="n">map</span> <span class="p">(</span><span class="n">mapWidthLine</span> <span class="p">(</span><span class="n">translateP</span> <span class="n">x</span> <span class="n">y</span><span class="p">))</span> <span class="p">(</span><span class="n">left</span> <span class="o">++</span> <span class="n">right</span> <span class="o">++</span> <span class="n">apex</span><span class="p">)</span>
+</span><span class='line'>              <span class="n">left</span>  <span class="ow">=</span> <span class="n">branch</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">angle</span> <span class="o">-</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>              <span class="n">right</span> <span class="ow">=</span> <span class="n">branch</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">angle</span> <span class="o">+</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>              <span class="n">apex</span>  <span class="ow">=</span> <span class="n">trunk</span>  <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">angle</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">branch</span> <span class="n">n</span> <span class="n">angle</span>
+</span><span class='line'>      <span class="o">|</span>  <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span>  <span class="ow">=</span> <span class="kt">[]</span>
+</span><span class='line'>      <span class="o">|</span>  <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">aa</span>  <span class="ow">=</span> <span class="p">[(</span><span class="n">wbgf</span> <span class="n">n</span><span class="p">,</span> <span class="n">map</span> <span class="p">(</span><span class="n">rotateP</span> <span class="n">angle</span><span class="p">)</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">bgf</span> <span class="n">n</span><span class="p">)])]</span>
+</span><span class='line'>          <span class="o">|</span> <span class="n">otherwise</span> <span class="ow">=</span>  <span class="n">trunk</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">aa</span><span class="p">)</span> <span class="n">angle</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&rsquo;s the result of the animated simulation of a um.. tree?
+<img src="http://skirk.github.io/images/post/opttree.gif"></p>
+
+<h2>References</h2>
+
+<ol class="bibliography"><li><span id="botanic">Prusinkiewicz, P., &#38; Lindenmayer, A. (1996). <i>The Algorithmic Beauty of Plants</i>. New York, NY, USA: Inc. Springer-Verlag New York.</span></li></ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Concurrency & Parallelism -  locks ]]></title>
@@ -36,7 +157,7 @@
 
 <p>Lastly, <em>convoying</em> of processes occur, in which a <em>convoy</em> of processes queue at a sequence of locks <a href="#lockfree">(Fraser, 2004)</a>.</p>
 
-<p>In the next post, I will look into lock-free synchronization.</p>
+<p>In the posts to come, I will look into lock-free synchronization.</p>
 
 <h2>References</h2>
 

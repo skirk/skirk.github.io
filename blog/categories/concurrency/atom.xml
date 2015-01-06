@@ -4,7 +4,7 @@
   <title><![CDATA[Category: concurrency, | Tuomo's corner]]></title>
   <link href="http://skirk.github.io/blog/categories/concurrency/atom.xml" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2014-12-04T02:51:52+00:00</updated>
+  <updated>2015-01-06T00:32:53+00:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -36,13 +36,14 @@
 
 <p>Lastly, <em>convoying</em> of processes occur, in which a <em>convoy</em> of processes queue at a sequence of locks <a href="#lockfree">(Fraser, 2004)</a>.</p>
 
-<p>In the next post, I will look into lock-free synchronization.</p>
+<p>In the posts to come, I will look into lock-free synchronization.</p>
 
 <h2>References</h2>
 
 <p><ol class="bibliography"><li><span id="lockfree">Fraser, K. (2004). <i>Practical lock-freedom</i>. Retrieved from http://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-579.pdf</span></li>
 <li><span id="Cormen">Cormen, T. H., Stein, C., Rivest, R. L., &#38; Leiserson, C. E. (2001). <i>Introduction to Algorithms</i> (2 ed.). McGraw-Hill Higher Education.</span></li>
-<li><span id="Kerrisk">Kerrisk, M. (2010). <i>The Linux Programming Interface: A Linux and UNIX System Programming Handbook</i> (1 ed.). San Francisco, CA, USA: No Starch Press.</span></li></ol></p>
+<li><span id="Kerrisk">Kerrisk, M. (2010). <i>The Linux Programming Interface: A Linux and UNIX System Programming Handbook</i> (1 ed.). San Francisco, CA, USA: No Starch Press.</span></li>
+<li><span id="botanic">Prusinkiewicz, P., &#38; Lindenmayer, A. (1996). <i>The Algorithmic Beauty of Plants</i>. New York, NY, USA: Inc. Springer-Verlag New York.</span></li></ol></p>
 ]]></content>
   </entry>
   
