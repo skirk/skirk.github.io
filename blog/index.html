@@ -7,7 +7,23 @@
 	<meta name="author" content="Tuomo Rinne">
 
 	
-	<meta name="description" content=" ">
+	<meta name="description" content="Continued on my Haskell journey and tackled plasma effect (explained here) 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+-- Create color for a Cell
+makecolor &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -60,6 +76,86 @@
 			<div id="content" class="inner">
 				<div class="center"><a href="/"><img src="/images/loading_pacman2.gif"></a><a href="/about">&#8226 About </a><a href="/blog/archives">&#8226 Archive </a><a href="/contact">&#8226 Contact</a></div>
 				
+
+
+    <article class="post">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-07T03:24:00+00:00" pubdate data-updated="true">Jan 7<span>th</span>, 2015</time></div>
+		
+	</div>
+	<h1 class="title"><a href="/blog/2015/01/07/haskell-plasma/">Haskell Plasma!</a></h1>
+	<div class="entry-content">
+		<p>Continued on my Haskell journey and tackled plasma effect (explained <a href="http://www.bidouille.org/prog/plasma">here</a>)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- Create color for a Cell</span>
+</span><span class='line'><span class="nf">makecolor</span> <span class="n">x</span> <span class="n">y</span> <span class="n">t</span> <span class="ow">=</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span><span class='line'>  <span class="kr">where</span>
+</span><span class='line'>  <span class="n">r</span> <span class="ow">=</span> <span class="p">(</span><span class="n">cos</span> <span class="p">(</span><span class="n">v</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="mf">0.9</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">0.7</span> <span class="p">)</span>
+</span><span class='line'>          <span class="n">g</span> <span class="ow">=</span> <span class="p">(</span><span class="n">sin</span> <span class="p">(</span><span class="n">v</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="p">)</span>
+</span><span class='line'>  <span class="n">b</span> <span class="ow">=</span> <span class="mf">0.3</span>
+</span><span class='line'>  <span class="n">v</span> <span class="ow">=</span> <span class="n">sin</span><span class="p">(</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">cx</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">cy</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">t</span> <span class="p">)</span>
+</span><span class='line'>  <span class="n">cx</span> <span class="ow">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span> <span class="o">-</span><span class="mf">0.5</span>
+</span><span class='line'>  <span class="n">cy</span> <span class="ow">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span><span class="mf">0.5</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">-- Draw one Cell or &quot;pixel&quot;</span>
+</span><span class='line'><span class="nf">drawCell</span> <span class="n">w</span> <span class="n">h</span> <span class="n">t</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">=</span> <span class="kr">do</span>
+</span><span class='line'>  <span class="n">color</span> <span class="o">$</span> <span class="n">makecolor</span> <span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">w</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">h</span><span class="p">)</span> <span class="n">t</span>
+</span><span class='line'>          <span class="kt">C</span><span class="o">.</span><span class="n">rectangle</span> <span class="n">x</span> <span class="n">y</span> <span class="p">(</span><span class="n">w</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span> <span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span>
+</span><span class='line'>  <span class="kt">C</span><span class="o">.</span><span class="n">fill</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>The drawing draw call is super simple:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- w h: width and height of canvas, t:time</span>
+</span><span class='line'><span class="nf">mapM</span> <span class="p">(</span><span class="n">drawCell</span> <span class="n">w</span> <span class="n">h</span> <span class="n">t</span><span class="p">)</span> <span class="p">[(</span><span class="n">x</span> <span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">|</span> <span class="n">x</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="p">,(</span><span class="n">w</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span> <span class="o">..</span> <span class="n">w</span><span class="p">],</span> <span class="n">y</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="p">,(</span><span class="n">h</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span> <span class="o">..</span> <span class="n">h</span> <span class="p">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+In essence the program is just a poor mans fragment shader. The resulting animation is below:</p>
+
+<p><video width="400" height="400" controls>
+<source src="/images/post/test.webm" type="video/webm">
+Your browser does not support the video tag.
+</video></p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post">
