@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C&P, | Tuomo's corner]]></title>
   <link href="http://skirk.github.io/blog/categories/c-and-p/atom.xml" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2015-01-07T04:14:30+00:00</updated>
+  <updated>2015-01-07T04:21:39+00:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -26,21 +26,24 @@
 
 <p> Another synchronization primitive is a <em>semaphore</em>. The semaphore is an integer value  which either grants or denies access to a shared variable. The semaphore is initiated with an absolute value, usually 0. When a process or a thread comes across a semaphore, a subtraction of 1 is taken from the value. If the value is negative, the process waits until a kernel grants it an access over the semaphore. Meanwhile a process waits for a unlock, another process has to add one to the semaphore to grant access for the waiting process.</p>
 
-<p>Generally, mutexes are preferred over semaphores, because they enforce better code structure. Only single thread can lock and unlock mutex, whereas one thread can decrement semaphore and another increment {% cite Kerrisk %}. Mutex and semaphore are collectively called <em>locks</em>. Using locks for synchronization has several problems:</p>
+<p>Generally, mutexes are preferred over semaphores, because they enforce better code structure. Only single thread can lock and unlock mutex, whereas one thread can decrement semaphore and another increment <a href="#Kerrisk">(Kerrisk, 2010)</a>. Mutex and semaphore are collectively called <em>locks</em>. Using locks for synchronization has several problems:</p>
 
 <p>One of them is <em>deadlock</em>, which is fairly easy to come across. The below image demonstrates 3 time steps, in which deadlock is achieved with two concurrent threads. Both of these threads will remain blocked indefinitely.</p>
 
-<p>{%img  /images/deadlock.svg %}</p>
+<p><img src="/images/deadlock.svg"></p>
 
 <p>A kernel scheduler can also interrupt thread execution, in a case where an higher-priority process starts executing on a thread instead. This is called <em>priority inversion</em>.</p>
 
-<p>Lastly, <em>convoying</em> of processes occur, in which a <em>convoy</em> of processes queue at a sequence of locks {% cite lockfree %}.</p>
+<p>Lastly, <em>convoying</em> of processes occur, in which a <em>convoy</em> of processes queue at a sequence of locks <a href="#lockfree">(Fraser, 2004)</a>.</p>
 
 <p>In the posts to come, I will look into lock-free synchronization.</p>
 
 <h2>References</h2>
 
-<p>{% bibliography &mdash;cited %}</p>
+<p><ol class="bibliography"><li><span id="lockfree">Fraser, K. (2004). <i>Practical lock-freedom</i>. Retrieved from http://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-579.pdf</span></li>
+<li><span id="Cormen">Cormen, T. H., Stein, C., Rivest, R. L., &#38; Leiserson, C. E. (2001). <i>Introduction to Algorithms</i> (2 ed.). McGraw-Hill Higher Education.</span></li>
+<li><span id="Kerrisk">Kerrisk, M. (2010). <i>The Linux Programming Interface: A Linux and UNIX System Programming Handbook</i> (1 ed.). San Francisco, CA, USA: No Starch Press.</span></li>
+<li><span id="botanic">Prusinkiewicz, P., &#38; Lindenmayer, A. (1996). <i>The Algorithmic Beauty of Plants</i>. New York, NY, USA: Inc. Springer-Verlag New York.</span></li></ol></p>
 ]]></content>
   </entry>
   
