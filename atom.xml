@@ -4,7 +4,7 @@
   <title><![CDATA[Tuomo's corner]]></title>
   <link href="http://skirk.github.io/atom.xml" rel="self"/>
   <link href="http://skirk.github.io/"/>
-  <updated>2015-01-07T04:25:33+00:00</updated>
+  <updated>2015-01-07T04:28:59+00:00</updated>
   <id>http://skirk.github.io/</id>
   <author>
     <name><![CDATA[Tuomo Rinne]]></name>
@@ -386,15 +386,6 @@ Once Run tab is open add either:</p>
 <p>to the Arguments line. Also check out in the Run Environment that the PATH variable contains &ldquo;:~/bin/mayautils&rdquo;, if that&rsquo;s not the case you can add it to in qtcreator by clicking Edit.
 Now whenever you run your app these commands are run and you should see your objects being displayed in Maya automatically.
 Remember that you have to close your app before the objects show up. You can of course open sockets in your c++ program and send commands from that if you need even more interactive feedback but I&rsquo;m not going to go into that.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[breathe]]></title>
-    <link href="http://skirk.github.io/blog/2014/05/05/breathe/"/>
-    <updated>2014-05-05T02:05:00+01:00</updated>
-    <id>http://skirk.github.io/blog/2014/05/05/breathe</id>
-    <content type="html"><![CDATA[<p><a href="http://skirk.github.io/images/post/breathe.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/breathe.jpg" alt="" /></a></p>
 ]]></content>
   </entry>
   
