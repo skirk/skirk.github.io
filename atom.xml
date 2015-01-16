@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tuomo's corner]]></title>
+  <link href="http://skirk.github.io/atom.xml" rel="self"/>
+  <link href="http://skirk.github.io/"/>
+  <updated>2015-01-07T04:28:59+00:00</updated>
+  <id>http://skirk.github.io/</id>
+  <author>
+    <name><![CDATA[Tuomo Rinne]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[haskell plasma!]]></title>
+    <link href="http://skirk.github.io/blog/2015/01/07/haskell-plasma/"/>
+    <updated>2015-01-07T03:24:00+00:00</updated>
+    <id>http://skirk.github.io/blog/2015/01/07/haskell-plasma</id>
+    <content type="html"><![CDATA[<p>On my Haskell journey and I decided to tackle plasma effect (explained <a href="http://www.bidouille.org/prog/plasma">here</a>)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- Create color for a Cell</span>
+</span><span class='line'><span class="nf">makecolor</span> <span class="n">x</span> <span class="n">y</span> <span class="n">t</span> <span class="ow">=</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span><span class='line'>  <span class="kr">where</span>
+</span><span class='line'>  <span class="n">r</span> <span class="ow">=</span> <span class="p">(</span><span class="n">cos</span> <span class="p">(</span><span class="n">v</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="mf">0.9</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">0.7</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">g</span> <span class="ow">=</span> <span class="p">(</span><span class="n">sin</span> <span class="p">(</span><span class="n">v</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">b</span> <span class="ow">=</span> <span class="mf">0.3</span>
+</span><span class='line'>  <span class="n">v</span> <span class="ow">=</span> <span class="n">sin</span><span class="p">(</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">cx</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">cy</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">t</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">cx</span> <span class="ow">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span> <span class="o">-</span><span class="mf">0.5</span>
+</span><span class='line'>  <span class="n">cy</span> <span class="ow">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span><span class="mf">0.5</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">-- Draw one Cell or &quot;pixel&quot;</span>
+</span><span class='line'><span class="nf">drawCell</span> <span class="n">w</span> <span class="n">h</span> <span class="n">t</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">=</span> <span class="kr">do</span>
+</span><span class='line'>  <span class="n">color</span> <span class="o">$</span> <span class="n">makecolor</span> <span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">w</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">h</span><span class="p">)</span> <span class="n">t</span>
+</span><span class='line'>  <span class="kt">C</span><span class="o">.</span><span class="n">rectangle</span> <span class="n">x</span> <span class="n">y</span> <span class="p">(</span><span class="n">w</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span> <span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span>
+</span><span class='line'>  <span class="kt">C</span><span class="o">.</span><span class="n">fill</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Thanks to list comprehensions, the draw call is super simple:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- w h: width and height of canvas, t:time</span>
+</span><span class='line'><span class="nf">mapM</span> <span class="p">(</span><span class="n">drawCell</span> <span class="n">w</span> <span class="n">h</span> <span class="n">t</span><span class="p">)</span> <span class="p">[(</span><span class="n">x</span> <span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">|</span> <span class="n">x</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="p">,(</span><span class="n">w</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span> <span class="o">..</span> <span class="n">w</span><span class="p">],</span> <span class="n">y</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="p">,(</span><span class="n">h</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span> <span class="o">..</span> <span class="n">h</span> <span class="p">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+In essence the program is a poor mans fragment shader. The resulting animation is below:</p>
+
+<p><video width="400" height="400" controls>
+<source src="http://skirk.github.io/images/post/test.webm" type="video/webm">
+Your browser does not support the video tag.
+</video></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[rock and lol]]></title>
+    <link href="http://skirk.github.io/blog/2015/01/06/rock-and-lol/"/>
+    <updated>2015-01-06T02:40:00+00:00</updated>
+    <id>http://skirk.github.io/blog/2015/01/06/rock-and-lol</id>
+    <content type="html"><![CDATA[<p><a href="http://skirk.github.io/images/post/guitarist2.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/guitarist2thumb.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Plants with Haskell]]></title>
+    <link href="http://skirk.github.io/blog/2015/01/05/plants-with-haskell/"/>
+    <updated>2015-01-05T23:23:00+00:00</updated>
+    <id>http://skirk.github.io/blog/2015/01/05/plants-with-haskell</id>
+    <content type="html"><![CDATA[<p>To fill the void in my life I decided to look into new programming language. From afar haskell seemed like a funky language so off I went! As an exercise I picked up something I conceptually simple: L-systems.</p>
+
+<p>My first take was more or less as I would have approached the problem with imperative languages. It&rsquo;s quite nice and neat to produce the lsystem string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- Different types of nodes</span>
+</span><span class='line'><span class="kr">data</span> <span class="kt">LNode</span> <span class="ow">=</span> <span class="kt">Draw</span> <span class="o">|</span> <span class="kt">TLeft</span> <span class="o">|</span> <span class="kt">TRight</span> <span class="o">|</span> <span class="kt">Push</span> <span class="o">|</span> <span class="kt">Pop</span> <span class="o">|</span> <span class="kt">PHolder</span>
+</span><span class='line'><span class="c1">-- Rules for creating new strings</span>
+</span><span class='line'><span class="nf">become</span> <span class="kt">PHolder</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">Draw</span><span class="p">,</span> <span class="kt">TLeft</span> <span class="p">,</span><span class="kt">Push</span><span class="p">,</span> <span class="kt">Push</span><span class="p">,</span> <span class="kt">PHolder</span><span class="p">,</span>
+</span><span class='line'>        <span class="kt">Pop</span><span class="p">,</span> <span class="kt">TRight</span><span class="p">,</span> <span class="kt">PHolder</span><span class="p">,</span> <span class="kt">Pop</span><span class="p">,</span> <span class="kt">TRight</span><span class="p">,</span>
+</span><span class='line'>        <span class="kt">Draw</span><span class="p">,</span> <span class="kt">Push</span><span class="p">,</span> <span class="kt">TRight</span><span class="p">,</span> <span class="kt">Draw</span><span class="p">,</span> <span class="kt">PHolder</span><span class="p">,</span>
+</span><span class='line'>                  <span class="kt">Pop</span><span class="p">,</span> <span class="kt">TLeft</span><span class="p">,</span><span class="kt">PHolder</span><span class="p">]</span>
+</span><span class='line'><span class="nf">become</span> <span class="kt">Draw</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">Draw</span><span class="p">,</span> <span class="kt">Draw</span><span class="p">]</span>
+</span><span class='line'><span class="nf">become</span> <span class="n">n</span> <span class="ow">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">recurse</span> <span class="ow">::</span> <span class="p">[</span><span class="kt">LNode</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="kt">LNode</span><span class="p">]</span>
+</span><span class='line'><span class="nf">recurse</span> <span class="n">ns</span> <span class="n">i</span>
+</span><span class='line'>  <span class="o">|</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">=</span> <span class="n">recurse</span> <span class="p">(</span><span class="n">concatMap</span> <span class="n">become</span> <span class="n">ns</span><span class="p">)</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">|</span> <span class="n">otherwise</span> <span class="ow">=</span> <span class="n">ns</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To draw the tree:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">foreach</span> <span class="p">(</span><span class="n">recurse</span> <span class="p">[</span><span class="kt">PHolder</span><span class="p">]</span> <span class="mi">6</span><span class="p">)</span> <span class="o">$</span> <span class="nf">\</span> <span class="n">x</span> <span class="ow">-&gt;</span>
+</span><span class='line'>  <span class="kr">do</span> <span class="n">drawNode</span> <span class="n">x</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">-- Drawing function for each node</span>
+</span><span class='line'><span class="nf">drawNode</span> <span class="kt">Draw</span>  <span class="ow">=</span> <span class="kr">do</span>
+</span><span class='line'>    <span class="kt">C</span><span class="o">.</span><span class="n">rectangle</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.06</span><span class="p">)</span> <span class="mi">0</span> <span class="mf">0.12</span> <span class="mf">0.25</span>
+</span><span class='line'>      <span class="kt">C</span><span class="o">.</span><span class="n">translate</span> <span class="mi">0</span> <span class="mf">0.25</span>
+</span><span class='line'><span class="nf">drawNode</span> <span class="kt">TLeft</span>  <span class="ow">=</span> <span class="kt">C</span><span class="o">.</span><span class="n">transform</span> <span class="o">$</span>  <span class="n">rotate2d</span> <span class="p">(</span><span class="o">-</span><span class="n">pi</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span>
+</span><span class='line'><span class="nf">drawNode</span> <span class="kt">TRight</span>  <span class="ow">=</span> <span class="kt">C</span><span class="o">.</span><span class="n">transform</span> <span class="o">$</span> <span class="n">rotate2d</span>  <span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span>
+</span><span class='line'><span class="nf">drawNode</span> <span class="kt">Pop</span> <span class="ow">=</span>  <span class="kt">C</span><span class="o">.</span><span class="n">restore</span>
+</span><span class='line'><span class="nf">drawNode</span> <span class="kt">Push</span> <span class="ow">=</span>  <span class="kt">C</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'><span class="nf">drawNode</span> <span class="kt">PHolder</span> <span class="ow">=</span> <span class="kt">C</span><span class="o">.</span><span class="n">rectangle</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A result of this:
+<a href="http://skirk.github.io/images/post/basicbush.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/basicbushthumb.jpg" alt="" /></a></p>
+
+<p>Even though the code is fairly neat, the code bugged me because it looked almost like C code. That&rsquo;s not acceptable! This is functional programming afterall. In the next approach I did a bit research and found an <a href="http://fhtr.blogspot.fi/2008/12/drawing-tree-with-haskell-and-cairo.html">article</a> (Man, that dude has pretty code, check it out!) that had something I wanted to do. So I took creative license and modified some of the stuff to create an tDOL-system <a href="#botanic">(Prusinkiewicz &#38; Lindenmayer, 1996)</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">trunk</span> <span class="n">n</span> <span class="n">angle</span>
+</span><span class='line'>      <span class="o">|</span>  <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span>  <span class="ow">=</span> <span class="kt">[]</span>
+</span><span class='line'>      <span class="o">|</span>  <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="ow">=</span> <span class="p">[(</span><span class="n">wtgf</span> <span class="n">n</span><span class="p">,</span> <span class="n">map</span> <span class="p">(</span><span class="n">rotateP</span> <span class="n">angle</span><span class="p">)</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tgf</span> <span class="n">n</span><span class="p">)])]</span>
+</span><span class='line'>      <span class="o">|</span>  <span class="n">otherwise</span>  <span class="ow">=</span> <span class="p">(</span><span class="n">thickness</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span> <span class="kt">:</span> <span class="n">evolve</span>
+</span><span class='line'>          <span class="kr">where</span>
+</span><span class='line'>              <span class="n">points</span> <span class="ow">=</span> <span class="n">map</span> <span class="p">(</span><span class="n">rotateP</span> <span class="n">angle</span><span class="p">)</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">igf</span> <span class="n">n</span><span class="p">)]</span>
+</span><span class='line'>              <span class="n">thickness</span> <span class="ow">=</span> <span class="n">wigf</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>              <span class="p">[</span><span class="kr">_</span><span class="p">,(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)]</span> <span class="ow">=</span> <span class="n">points</span>
+</span><span class='line'>              <span class="n">evolve</span> <span class="ow">=</span> <span class="n">map</span> <span class="p">(</span><span class="n">mapWidthLine</span> <span class="p">(</span><span class="n">translateP</span> <span class="n">x</span> <span class="n">y</span><span class="p">))</span> <span class="p">(</span><span class="n">left</span> <span class="o">++</span> <span class="n">right</span> <span class="o">++</span> <span class="n">apex</span><span class="p">)</span>
+</span><span class='line'>              <span class="n">left</span>  <span class="ow">=</span> <span class="n">branch</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">angle</span> <span class="o">-</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>              <span class="n">right</span> <span class="ow">=</span> <span class="n">branch</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">angle</span> <span class="o">+</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>              <span class="n">apex</span>  <span class="ow">=</span> <span class="n">trunk</span>  <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">angle</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">branch</span> <span class="n">n</span> <span class="n">angle</span>
+</span><span class='line'>      <span class="o">|</span>  <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span>  <span class="ow">=</span> <span class="kt">[]</span>
+</span><span class='line'>      <span class="o">|</span>  <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">aa</span>  <span class="ow">=</span> <span class="p">[(</span><span class="n">wbgf</span> <span class="n">n</span><span class="p">,</span> <span class="n">map</span> <span class="p">(</span><span class="n">rotateP</span> <span class="n">angle</span><span class="p">)</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">bgf</span> <span class="n">n</span><span class="p">)])]</span>
+</span><span class='line'>          <span class="o">|</span> <span class="n">otherwise</span> <span class="ow">=</span>  <span class="n">trunk</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">aa</span><span class="p">)</span> <span class="n">angle</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&rsquo;s the result of the animated simulation of a um.. tree?
+<img src="http://skirk.github.io/images/post/opttree.gif"></p>
+
+<h2>References</h2>
+
+<ol class="bibliography"><li><span id="botanic">Prusinkiewicz, P., &#38; Lindenmayer, A. (1996). <i>The Algorithmic Beauty of Plants</i>. New York, NY, USA: Inc. Springer-Verlag New York.</span></li></ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Concurrency & Parallelism -  locks ]]></title>
+    <link href="http://skirk.github.io/blog/2014/12/03/software-transactional-memory/"/>
+    <updated>2014-12-03T16:51:00+00:00</updated>
+    <id>http://skirk.github.io/blog/2014/12/03/software-transactional-memory</id>
+    <content type="html"><![CDATA[<p>On my path to nirvana, I decided to detour to learn threading and concurrency. In this Concurrency &amp; Parallelism series I&rsquo;ll go through some fundamental concepts that is involved. Most of the information (that will be ) presented in the series is new information for me. Therefore, the act of writing will work as my parser which formats the information in sensible manner. Hopefully this will be useful for someone else as well.</p>
+
+<h2>Basic Synchronization</h2>
+
+<p>The usual solution to conduct interprocess synchronization is to use lock-based solutions such as <em>mutexes</em> where certain shared data elements are locked in mutually exclusive manner. The shared variable modifiable by multitude of threads is <em>locked</em> until a thread stops modifying the data. When finished the data is <em>unlocked</em>.</p>
+
+<p> Another synchronization primitive is a <em>semaphore</em>. The semaphore is an integer value  which either grants or denies access to a shared variable. The semaphore is initiated with an absolute value, usually 0. When a process or a thread comes across a semaphore, a subtraction of 1 is taken from the value. If the value is negative, the process waits until a kernel grants it an access over the semaphore. Meanwhile a process waits for a unlock, another process has to add one to the semaphore to grant access for the waiting process.</p>
+
+<p>Generally, mutexes are preferred over semaphores, because they enforce better code structure. Only single thread can lock and unlock mutex, whereas one thread can decrement semaphore and another increment <a href="#Kerrisk">(Kerrisk, 2010)</a>. Mutex and semaphore are collectively called <em>locks</em>. Using locks for synchronization has several problems:</p>
+
+<p>One of them is <em>deadlock</em>, which is fairly easy to come across. The below image demonstrates 3 time steps, in which deadlock is achieved with two concurrent threads. Both of these threads will remain blocked indefinitely.</p>
+
+<p><img src="http://skirk.github.io/images/deadlock.svg"></p>
+
+<p>A kernel scheduler can also interrupt thread execution, in a case where an higher-priority process starts executing on a thread instead. This is called <em>priority inversion</em>.</p>
+
+<p>Lastly, <em>convoying</em> of processes occur, in which a <em>convoy</em> of processes queue at a sequence of locks <a href="#lockfree">(Fraser, 2004)</a>.</p>
+
+<p>In the posts to come, I will look into lock-free synchronization.</p>
+
+<h2>References</h2>
+
+<ol class="bibliography"><li><span id="Kerrisk">Kerrisk, M. (2010). <i>The Linux Programming Interface: A Linux and UNIX System Programming Handbook</i> (1 ed.). San Francisco, CA, USA: No Starch Press.</span></li>
+<li><span id="lockfree">Fraser, K. (2004). <i>Practical lock-freedom</i>. Retrieved from http://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-579.pdf</span></li></ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Meshing tip]]></title>
+    <link href="http://skirk.github.io/blog/2014/05/07/meshing/"/>
+    <updated>2014-05-07T08:09:00+01:00</updated>
+    <id>http://skirk.github.io/blog/2014/05/07/meshing</id>
+    <content type="html"><![CDATA[<p>Few people in University are working with meshes so I was asked to write an email about workflow optimizations that I found useful. This is the email more or less. I&rsquo;m myself mostly working on commandline but I&rsquo;ve included how to set up a qtcreator as well.</p>
+
+<p>Here we go:</p>
+
+<p>I got a piece of code that creates an .obj file that I want to open in Maya. You can fire up Maya and go and look for the file through bunch of submenus and whatnot. If you got to this a lot it gets annoying quite quickly. Wouldn&rsquo;t it be awesome if Maya just automatically loaded up your file? Here&rsquo;s how:</p>
+
+<p>First up open terminal and type:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">echo</span> <span class="s1">&#39;commandPort -n &quot;:2222&quot;;&#39;</span> &gt; ~/maya/2014-x64/scripts/userSetup.mel
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will make maya listen to a port 2222 into which we can pass in some commands. After this we need few scripts.
+Here&rsquo;s a script that I call <em>mayain</em>, this is a python script that takes in standard input and sends that to the 2222 port.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">socket</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">sys</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">TCP_IP</span> <span class="o">=</span> <span class="s">&#39;127.0.0.1&#39;</span>
+</span><span class='line'><span class="n">TCP_PORT</span> <span class="o">=</span> <span class="mi">2222</span>
+</span><span class='line'><span class="n">BUFFER_SIZE</span> <span class="o">=</span> <span class="mi">1024</span>
+</span><span class='line'><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">MESSAGE</span> <span class="o">=</span> <span class="n">line</span>
+</span><span class='line'>    <span class="k">print</span> <span class="n">MESSAGE</span>
+</span><span class='line'><span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+</span><span class='line'><span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">TCP_IP</span><span class="p">,</span> <span class="n">TCP_PORT</span><span class="p">))</span>
+</span><span class='line'><span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">MESSAGE</span><span class="p">)</span>
+</span><span class='line'><span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then there&rsquo;s a bash script called <em>importstring</em>, this script either takes an file name as an command line argument or standard input, and creates a mel command out of it that imports objs into maya.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$1&quot;</span> <span class="o">]</span>
+</span><span class='line'><span class="k">then</span>
+</span><span class='line'><span class="k">        </span><span class="nb">read </span>objname
+</span><span class='line'>        <span class="nv">objabs</span><span class="o">=</span><span class="k">$(</span>readlink -f <span class="nv">$objname</span><span class="k">)</span>
+</span><span class='line'>        <span class="nb">echo</span> <span class="s1">&#39;file -import -type &quot;OBJ&quot; -ra true -options &quot;mo=2;lo=0&quot;  -pr -loadReferenceDepth &quot;all&quot; &quot;&#39;</span><span class="nv">$objabs</span><span class="s1">&#39;&quot;;&#39;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'><span class="k">        </span><span class="nv">objabs</span><span class="o">=</span><span class="k">$(</span>readlink -f <span class="nv">$1</span><span class="k">)</span>
+</span><span class='line'>        <span class="nb">echo</span> <span class="s1">&#39;file -import -type &quot;OBJ&quot; -ra true -options &quot;mo=2;lo=0&quot;  -pr -loadReferenceDepth &quot;all&quot; &quot;&#39;</span><span class="nv">$objabs</span><span class="s1">&#39;&quot;;&#39;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create a folder ~/bin/:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir ~/bin
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and move the files to that folder. The folder should contain now a addtolibrary(see second tip) file as well as a folder mayautils that contains mayain and importstring files.
+Let&rsquo;s make sure they are executable by running:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>chmod +x ~/bin/mayautils/*
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>One step more and we are ready to test it out:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">echo</span> <span class="s2">&quot;export PATH=$PATH:~/bin/mayautils&quot;</span> &gt;&gt; ~/.bashrc
+</span><span class='line'><span class="nb">source</span> ~/.bashrc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With PATH variable it&rsquo;s good idea to be careful as it can mess up all kinds of stuff if it&rsquo;s wrongly setup.
+Make sure the mayautils folder doesn&rsquo;t contain anything else than two scripts.
+Also make sure to use &lsquo;>>&rsquo; instead of &lsquo;>&rsquo;, otherwise you&rsquo;ll overwrite your .bashrc file.</p>
+
+<p>Now if you have an .obj file, you should be able to do:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>importstring test.obj | mayain
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and your obj should be showing up in maya. (Maya has to be running before the executing this)
+Ok, cool, if your program uses standard output to print out a obj file name in terminal you can do:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./application | importstring | mayain
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>or if it just creates an .obj file without printing out the name you can do:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./application <span class="o">&amp;&amp;</span> importstring &lt;name&gt;.obj | mayain
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Note &amp;&amp; means the next command is executed AFTER application so if you got a GUI elements they need to be closed before importstring is executed. With a single &amp; the importstring is executed straight after the application is fired up, but this might happen before your application has finished meshing</em></p>
+
+<p>Okay, so all is good if you are just in terminal, but if you are developing in qtcreator it might be inconvenient to go to terminal to run these command.
+We can modify the run command a bit to link qtcreator to the hoop as well.
+Once you have your qtcreator project open go to &ldquo;Projects&rdquo; tab in the left hand side. Then under &ldquo;Desktop&rdquo; at the top there&rsquo;s a &ldquo;Run&rdquo; tab.
+Once Run tab is open add either:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>| importstring | mayain
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>or</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">&amp;&amp;</span> importstring test.obj | mayain
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to the Arguments line. Also check out in the Run Environment that the PATH variable contains &ldquo;:~/bin/mayautils&rdquo;, if that&rsquo;s not the case you can add it to in qtcreator by clicking Edit.
+Now whenever you run your app these commands are run and you should see your objects being displayed in Maya automatically.
+Remember that you have to close your app before the objects show up. You can of course open sockets in your c++ program and send commands from that if you need even more interactive feedback but I&rsquo;m not going to go into that.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[flower]]></title>
+    <link href="http://skirk.github.io/blog/2014/05/05/flower/"/>
+    <updated>2014-05-05T02:03:00+01:00</updated>
+    <id>http://skirk.github.io/blog/2014/05/05/flower</id>
+    <content type="html"><![CDATA[<p><a href="http://skirk.github.io/images/post/flower.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/flower.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[basho poem]]></title>
+    <link href="http://skirk.github.io/blog/2014/04/30/basho/"/>
+    <updated>2014-04-30T23:48:00+01:00</updated>
+    <id>http://skirk.github.io/blog/2014/04/30/basho</id>
+    <content type="html"><![CDATA[<p><a href="http://skirk.github.io/images/post/basho.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/basho.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[guitarist]]></title>
+    <link href="http://skirk.github.io/blog/2014/04/30/drawing1/"/>
+    <updated>2014-04-30T23:30:00+01:00</updated>
+    <id>http://skirk.github.io/blog/2014/04/30/drawing1</id>
+    <content type="html"><![CDATA[<p><a href="http://skirk.github.io/images/post/guitaristsmall.jpg" class="fancybox" title=""><img src="http://skirk.github.io/images/post/thumb/guitaristsmall.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+</feed>

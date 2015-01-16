@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Maya | Tuomo's corner]]></title>
+  <link href="http://skirk.github.io/blog/categories/maya/atom.xml" rel="self"/>
+  <link href="http://skirk.github.io/"/>
+  <updated>2015-01-07T04:28:59+00:00</updated>
+  <id>http://skirk.github.io/</id>
+  <author>
+    <name><![CDATA[Tuomo Rinne]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Meshing tip]]></title>
+    <link href="http://skirk.github.io/blog/2014/05/07/meshing/"/>
+    <updated>2014-05-07T08:09:00+01:00</updated>
+    <id>http://skirk.github.io/blog/2014/05/07/meshing</id>
+    <content type="html"><![CDATA[<p>Few people in University are working with meshes so I was asked to write an email about workflow optimizations that I found useful. This is the email more or less. I&rsquo;m myself mostly working on commandline but I&rsquo;ve included how to set up a qtcreator as well.</p>
+
+<p>Here we go:</p>
+
+<p>I got a piece of code that creates an .obj file that I want to open in Maya. You can fire up Maya and go and look for the file through bunch of submenus and whatnot. If you got to this a lot it gets annoying quite quickly. Wouldn&rsquo;t it be awesome if Maya just automatically loaded up your file? Here&rsquo;s how:</p>
+
+<p>First up open terminal and type:</p>
+
+<p>``` bash</p>
+
+<pre><code>echo 'commandPort -n ":2222";' &gt; ~/maya/2014-x64/scripts/userSetup.mel
+</code></pre>
+
+<p>```</p>
+
+<p>This will make maya listen to a port 2222 into which we can pass in some commands. After this we need few scripts.
+Here&rsquo;s a script that I call <em>mayain</em>, this is a python script that takes in standard input and sends that to the 2222 port.</p>
+
+<p>``` python
+import socket
+import sys</p>
+
+<p>TCP_IP = &lsquo;127.0.0.1&rsquo;
+TCP_PORT = 2222
+BUFFER_SIZE = 1024
+for line in sys.stdin:</p>
+
+<pre><code>MESSAGE = line
+print MESSAGE
+</code></pre>
+
+<p>s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((TCP_IP, TCP_PORT))
+s.send(MESSAGE)
+s.close()
+```</p>
+
+<p>Then there&rsquo;s a bash script called <em>importstring</em>, this script either takes an file name as an command line argument or standard input, and creates a mel command out of it that imports objs into maya.</p>
+
+<p>``` bash</p>
+
+<h1>!/bin/bash</h1>
+
+<p>if [ -z &ldquo;$1&rdquo; ]
+then</p>
+
+<pre><code>    read objname
+    objabs=$(readlink -f $objname)
+    echo 'file -import -type "OBJ" -ra true -options "mo=2;lo=0"  -pr -loadReferenceDepth "all" "'$objabs'";'
+</code></pre>
+
+<p>else</p>
+
+<pre><code>    objabs=$(readlink -f $1)
+    echo 'file -import -type "OBJ" -ra true -options "mo=2;lo=0"  -pr -loadReferenceDepth "all" "'$objabs'";'
+</code></pre>
+
+<p>fi
+```</p>
+
+<p>Create a folder ~/bin/:</p>
+
+<p><code>bash
+mkdir ~/bin
+</code></p>
+
+<p>and move the files to that folder. The folder should contain now a addtolibrary(see second tip) file as well as a folder mayautils that contains mayain and importstring files.
+Let&rsquo;s make sure they are executable by running:</p>
+
+<p>``` bash</p>
+
+<pre><code>chmod +x ~/bin/mayautils/*
+</code></pre>
+
+<p>```</p>
+
+<p>One step more and we are ready to test it out:</p>
+
+<p>``` bash</p>
+
+<pre><code>echo "export PATH=$PATH:~/bin/mayautils" &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+
+<p>```</p>
+
+<p>With PATH variable it&rsquo;s good idea to be careful as it can mess up all kinds of stuff if it&rsquo;s wrongly setup.
+Make sure the mayautils folder doesn&rsquo;t contain anything else than two scripts.
+Also make sure to use &lsquo;>>&rsquo; instead of &lsquo;>&rsquo;, otherwise you&rsquo;ll overwrite your .bashrc file.</p>
+
+<p>Now if you have an .obj file, you should be able to do:</p>
+
+<p>``` bash</p>
+
+<pre><code>importstring test.obj | mayain
+</code></pre>
+
+<p>```</p>
+
+<p>and your obj should be showing up in maya. (Maya has to be running before the executing this)
+Ok, cool, if your program uses standard output to print out a obj file name in terminal you can do:</p>
+
+<p>``` bash</p>
+
+<pre><code>./application | importstring | mayain 
+</code></pre>
+
+<p>```</p>
+
+<p>or if it just creates an .obj file without printing out the name you can do:</p>
+
+<p>``` bash</p>
+
+<pre><code>./application &amp;&amp; importstring &lt;name&gt;.obj | mayain
+</code></pre>
+
+<p>```</p>
+
+<p><em>Note &amp;&amp; means the next command is executed AFTER application so if you got a GUI elements they need to be closed before importstring is executed. With a single &amp; the importstring is executed straight after the application is fired up, but this might happen before your application has finished meshing</em></p>
+
+<p>Okay, so all is good if you are just in terminal, but if you are developing in qtcreator it might be inconvenient to go to terminal to run these command.
+We can modify the run command a bit to link qtcreator to the hoop as well.
+Once you have your qtcreator project open go to &ldquo;Projects&rdquo; tab in the left hand side. Then under &ldquo;Desktop&rdquo; at the top there&rsquo;s a &ldquo;Run&rdquo; tab.
+Once Run tab is open add either:</p>
+
+<p><code>bash
+| importstring | mayain
+</code></p>
+
+<p>or</p>
+
+<p><code>bash
+&amp;&amp; importstring test.obj | mayain
+</code></p>
+
+<p>to the Arguments line. Also check out in the Run Environment that the PATH variable contains &ldquo;:~/bin/mayautils&rdquo;, if that&rsquo;s not the case you can add it to in qtcreator by clicking Edit.
+Now whenever you run your app these commands are run and you should see your objects being displayed in Maya automatically.
+Remember that you have to close your app before the objects show up. You can of course open sockets in your c++ program and send commands from that if you need even more interactive feedback but I&rsquo;m not going to go into that.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Sketch | Tuomo's corner]]></title>
+  <link href="http://skirk.github.io/blog/categories/sketch/atom.xml" rel="self"/>
+  <link href="http://skirk.github.io/"/>
+  <updated>2015-01-07T04:28:59+00:00</updated>
+  <id>http://skirk.github.io/</id>
+  <author>
+    <name><![CDATA[Tuomo Rinne]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[rock and lol]]></title>
+    <link href="http://skirk.github.io/blog/2015/01/06/rock-and-lol/"/>
+    <updated>2015-01-06T02:40:00+00:00</updated>
+    <id>http://skirk.github.io/blog/2015/01/06/rock-and-lol</id>
+    <content type="html"><![CDATA[<p><a href="/images/post/guitarist2.jpg" class="fancybox" title=""><img src="/images/post/thumb/guitarist2thumb.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[basho poem]]></title>
+    <link href="http://skirk.github.io/blog/2014/04/30/basho/"/>
+    <updated>2014-04-30T23:48:00+01:00</updated>
+    <id>http://skirk.github.io/blog/2014/04/30/basho</id>
+    <content type="html"><![CDATA[<p><a href="/images/post/basho.jpg" class="fancybox" title=""><img src="/images/post/thumb/basho.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[guitarist]]></title>
+    <link href="http://skirk.github.io/blog/2014/04/30/drawing1/"/>
+    <updated>2014-04-30T23:30:00+01:00</updated>
+    <id>http://skirk.github.io/blog/2014/04/30/drawing1</id>
+    <content type="html"><![CDATA[<p><a href="/images/post/guitaristsmall.jpg" class="fancybox" title=""><img src="/images/post/thumb/guitaristsmall.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+</feed>
