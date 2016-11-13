@@ -1,0 +1,9 @@
+---
+layout: post
+title: "basho poem"
+date: 2014-04-30 23:48
+comments: false
+categories: 
+- Sketch
+---
+{%photo /images/post/basho.jpg /images/post/thumb/basho.jpg %} 

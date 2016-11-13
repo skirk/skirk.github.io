@@ -1,0 +1,9 @@
+---
+layout: post
+title: "guitarist"
+date: 2014-04-30 23:30
+comments: false
+categories: 
+- Sketch
+---
+{%photo /images/post/guitaristsmall.jpg /images/post/thumb/guitaristsmall.jpg %} 

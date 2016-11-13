@@ -1,0 +1,10 @@
+---
+layout: post
+title: "flower"
+date: 2014-05-05 02:03
+comments: true
+categories: 
+- Traditional Printing
+---
+{%photo /images/post/flower.jpg /images/post/thumb/flower.jpg %} 
+
