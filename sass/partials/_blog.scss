@@ -28,20 +28,20 @@ article {
       background: $img-border bottom left repeat-x;
     }
   }
-  h2 {
-    padding-top: 0.8em;
-    background: $img-border top left repeat-x;
-  }
-  .entry-content & h2:first-child, header + h2 { padding-top: 0; }
-  h2:first-child, header + h2 { background: none; }
-  .feature {
-    padding-top: .5em;
-    margin-bottom: 1em;
-    padding-bottom: 1em;
-    background: $img-border bottom left repeat-x;
-    font-size: 2.0em; font-style: italic;
-    line-height: 1.3em;
-  }
+  //h2 {
+  //  padding-top: 0.8em;
+  //  background: $img-border top left repeat-x;
+  //}
+  //.entry-content & h2:first-child, header + h2 { padding-top: 0; }
+  //h2:first-child, header + h2 { background: none; }
+  //.feature {
+  //  //padding-top: .5em;
+  //  //margin-bottom: 1em;
+  //  //padding-bottom: 1em;
+  //  //background: $img-border bottom left repeat-x;
+  //  //font-size: 2.0em; font-style: italic;
+  //  //line-height: 1.3em;
+  //}
   img, video, .flash-video {
     @extend .flex-content;
     @extend .basic-alignment;

@@ -32,6 +32,8 @@ If current time of the digital alarm is same as the set alarm, the leds of the b
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XT1x2FgiiyY" frameborder="0" allowfullscreen></iframe>
 
+Special thanks to people at ##fpga @ irc.freenode.net!
+
 ## References
 
 {% bibliography --cited %}

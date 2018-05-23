@@ -19,12 +19,15 @@ body{
 }
 h1{
 	font-size: 1.8em;
+	color: $color-main;
 }
 h2{
 	font-size: 1.5em;
+	color: $color-gray03;
 }
 h3{
 	font-size: 1.3em;
+	color: $color-gray03;
 }
 a{
 	text-decoration: none;
