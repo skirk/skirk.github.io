@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Move to a pure Jekyll blog"
-categories: jekyll update
+tags: [jekyll, update]
 ---
 
 This blog has been powered by Jekyll since the beginning but with a wrapper called [Octopress](http://octopress.org/).

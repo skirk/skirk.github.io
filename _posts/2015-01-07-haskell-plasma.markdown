@@ -3,7 +3,7 @@ layout: post
 title: "Haskell Plasma!"
 date: 2015-01-07 03:24
 comments: true
-categories: 
+tags: [haskell]
 ---
 
 On my Haskell journey and I decided to tackle plasma effect (explained [here](http://www.bidouille.org/prog/plasma))

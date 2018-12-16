@@ -3,7 +3,7 @@ layout: post
 title: "MIT 6.828"
 date: 2018-05-23 21:14
 comments: true
-categories: [OSDev]
+tags: [osdev]
 ---
 After my previous blog [post](http://www.tuomo.co.uk/blog/2017/05/19/little-penguin-challenge/) in which I celebrated the finish othe [Eudyptula Challenge](http://eudyptula-challenge.org/) I took another personal challenge in similar vein. I wanted to study more operating system concepts and after some research I found out some online material about the subject matter. In particular I got interested in the [MIT course 6.828](https://pdos.csail.mit.edu/6.828/) that is being taught in MIT, and the course material is also used as a base for OS courses in other universities. I decided to follow this material on my own pace.
 

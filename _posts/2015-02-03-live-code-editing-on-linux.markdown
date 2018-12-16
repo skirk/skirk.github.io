@@ -3,7 +3,7 @@ layout: post
 title: "Live code editing on Linux"
 date: 2015-02-03 02:11
 comments: true
-categories: Cpp
+tags: [linux, cpp]
 ---
 
 Meanwhile waiting for nirvana, I've spent some time watching [the handmade hero](https://handmadehero.org/). The video series go through game development from start to finish, without using external libraries etc.

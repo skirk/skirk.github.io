@@ -3,7 +3,7 @@ layout: post
 title: "Concurrency & Parallelism -  locks "
 date: 2014-12-03 16:51
 comments: true
-categories: concurrency, parallelism
+tags: [concurrency, parallelism]
 ---
 
 On my path to nirvana, I decided to detour to learn threading and concurrency. In this Concurrency & Parallelism series I'll go through some fundamental concepts that is involved. Most of the information (that will be ) presented in the series is new information for me. Therefore, the act of writing will work as my parser which formats the information in sensible manner. Hopefully this will be useful for someone else as well.

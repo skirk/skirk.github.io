@@ -3,7 +3,7 @@ layout: post
 title: "Fixing mp3 metadata on Linux"
 date: 2015-02-16 01:59
 comments: true
-categories: Linux, Metadata
+tags: [linux]
 ---
 
 Over the years my image and music collections have iteratively become more and more of a mess. The main culprit is metadata rot. In essence I often listen to obscure demoscene/game music that I collect from various sources. Some of them come with no metadata whatsoever. Some of them have it completely garbled, and so on. Hence, few hours to spare I took the role of Toxic Avenger and got to work.

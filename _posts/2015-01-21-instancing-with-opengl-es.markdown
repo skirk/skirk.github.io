@@ -3,7 +3,7 @@ layout: post
 title: "Instancing on OpenGL ES 2"
 date: 2015-01-21 04:49
 comments: true
-categories: 
+tags: [opengl, cpp]
 ---
 About an year ago I was messing away with my Raspberry Pi learning the ins and outs of the platform. For me Raspberry Pi is a platform that shouts for certain level of DIY attitude, which in my mind means: the more hackery involved, the better. Where's the fun otherwise?
 

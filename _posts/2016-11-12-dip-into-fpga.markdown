@@ -3,7 +3,7 @@ layout: post
 title: "A dip into FPGAs"
 date: 2016-11-12 20:04
 comments: true
-categories: FPGA, Tinkering
+tags: [fpga]
 ---
 
 Electronic circuits have always sparked my interest. However, my understanding of the topic has been minimal. When fronted with some free weekends I therefore decided to finally get a feeling what digital circuitry is all about. 

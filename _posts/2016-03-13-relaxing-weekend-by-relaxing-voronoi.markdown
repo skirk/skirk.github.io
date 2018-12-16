@@ -3,7 +3,7 @@ layout: post
 title: "Relaxing weekend by relaxing voronoi"
 date: 2016-03-13 22:26
 comments: true
-categories: Cpp
+tags: [cpp]
 ---
 
 After a week of full throttle coding, a nice way to relax is to code bit more, obviously.

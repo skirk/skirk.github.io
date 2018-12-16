@@ -3,7 +3,7 @@ layout: post
 title: "Meshing tip"
 date: 2014-05-07 08:09
 comments: true
-categories: C++, University, Maya
+tags: [cpp, maya]
 ---
 
 Few people in University are working with meshes so I was asked to write an email about workflow optimizations that I found useful. This is the email more or less. I'm myself mostly working on commandline but I've included how to set up a qtcreator as well.

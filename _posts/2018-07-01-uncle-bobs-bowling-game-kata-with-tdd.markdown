@@ -3,7 +3,7 @@ layout: post
 title: "Uncle Bob's Bowling Game Kata with TDD"
 date: 2018-07-01 21:20
 comments: true
-categories: TDD
+tags: [cpp]
 ---
 
 As a small exercise I thought it would be nice to get my hands dirty with

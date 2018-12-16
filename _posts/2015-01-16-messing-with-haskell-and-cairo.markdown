@@ -3,7 +3,7 @@ layout: post
 title: "Messing around with Cairo & Haskell"
 date: 2015-01-16 02:57
 comments: true
-categories: [Haskell]
+tags: [haskell]
 ---
 
 Haskell again, this time I wanted create some actual data structures and draw them. I didn't really have any idea what I'm aiming to do so this is purely creative programming exercise in order to learn a bit more about Haskell. 

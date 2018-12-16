@@ -3,7 +3,7 @@ layout: post
 title: "Killing the hydra (and compiling mesa)"
 date: 2018-12-08 21:43
 comments: true
-categories: mesa, linux
+tags: [mesa, linux]
 ---
 
 Recently I took on the task to explore the graphics stack on linux. This post is about getting mesa up and running. As a kinetic learner the most fun kind of  exploration for me is to get my hands dirty by start changing and breaking things. In order to break stuff, the stuff needs to work first. 

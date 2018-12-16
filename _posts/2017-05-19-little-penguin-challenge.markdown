@@ -3,7 +3,7 @@ layout: post
 title: "Little Penguin Challenge"
 date: 2017-05-19 01:37
 comments: true
-categories:  Linux, Kernel
+tags:  [linux, kernel]
 ---
 
 23rd of Jan 2017 I got my first task for [Eudyptula Challenge](http://eudyptula-challenge.org/) and 19th of May 2017 I received an email for completion of the challenge. I'm the 166th person to complete the challenge, which has now ran for over 3 years and has over 18000 unique participants.  
