@@ -1,0 +1,28 @@
+---
+layout: post
+title: "MIT 6.828"
+date: 2018-05-23 21:14
+comments: true
+categories: [OSDev]
+---
+After my previous blog [post](http://www.tuomo.co.uk/blog/2017/05/19/little-penguin-challenge/) in which I celebrated the finish othe [Eudyptula Challenge](http://eudyptula-challenge.org/) I took another personal challenge in similar vein. I wanted to study more operating system concepts and after some research I found out some online material about the subject matter. In particular I got interested in the [MIT course 6.828](https://pdos.csail.mit.edu/6.828/) that is being taught in MIT, and the course material is also used as a base for OS courses in other universities. I decided to follow this material on my own pace.
+
+The course consists of labs which each have a distinct theme or topic. The goal is to fill in functionality in a already existing kernel called JOS, which initially lacks fundamental features. Over the course JOS is extended with things like virtual memory managament, processes and file system. Have a look [here](https://pdos.csail.mit.edu/6.828/2017/overview.html) for more detailed overview. Each lab builds on top of the preceding, and as you go along marking scripts help you to check whether you have succeeded in the given tasks. The final cherry on top is Lab6 in which the participant has to build a a network driver and a  webserver to serve a simple site, as seen below!
+
+![JOS screenshot](/assets/jos_webserver.png)
+
+### Oh why, oh why?  
+
+One of the driving forces for the undertaking was my general interest in OS dev and the course was advertised as hands-on which lured me in. I got what I signed up for, and frankly I truly enjoyed the practical approach as rarely you get to apply theory into practice in such a direct way.
+Hacking away in gdb and vim also tickles my fancy.
+
+### Lessons learnt
+
+When things go south, debug messages are your best friend. Even if gdb is a handy tool, often I found analysing log messages more helpful especially in the more tricky problems like virtual memory issues.
+
+Gdb really shined when implementing hardware interrupts and back tracing from crashes and other errors.
+ 
+Also, when working in such a low-level environment the bugs get super obscure really fast. Since I was using different versions of tools than the course material suggested I ran into some compatibility issues. Most major issue I had to solve was fixing a linker script that changed behaviour between versions. For example, the script defined an _end_ variable that supposedly signified a point in memory after static variables. However, due to the linker script issue, the _end_ variable ended up pointing to the *start* point of static variables. I ended up allocating my virtual memory pages on top of static variables which caused all kinds of interesting issues.
+
+### Post Mortem
+I am in awe how well the  course was structured. The challenges were very interesting and as soon as you thought you figured out something the course fronts you with another problem that challenges your previous preconceptions. I really enjoyed working on the course and I'm planning to dabble on similar things more in the future. Adieu!

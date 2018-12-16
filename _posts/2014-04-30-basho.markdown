@@ -1,0 +1,8 @@
+---
+layout: post
+title: "Basho Poem"
+date: 2014-04-30 23:48
+comments: false
+categories: [Sketch]
+---
+![Basho Poem](/assets/basho.jpg)
