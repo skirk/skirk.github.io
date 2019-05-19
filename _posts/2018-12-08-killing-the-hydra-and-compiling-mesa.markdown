@@ -5,7 +5,8 @@ date: 2018-12-08 21:43
 comments: true
 tags: [mesa, linux] 
 ---
-<span style="color:red"> Update 2019-05-18: Since this page was posted I've changed the setup quite a bit, I'm now using a setup more alike [this]({% post_url 2019-05-19-compiling-mesa-pt2%}) </span>
+<span style="color:red"> Update 2019-05-19: Since this page was posted I've changed the setup quite a bit, I'm now using a setup more alike </span> 
+[this]({% post_url 2019-05-19-compiling-mesa-pt2 %}) 
 
 
 Recently I took on the task to explore the graphics stack on linux. This post is about getting mesa up and running. As a kinetic learner the most fun kind of  exploration for me is to get my hands dirty by start changing and breaking things. In order to break stuff, the stuff needs to work first. 

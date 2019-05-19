@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Compiling mesa pt.2"
-date: 2019-05-19 21:43
+date: 2019-05-19 
 comments: true
 tags: [mesa, VM, containers, linux]
 ---
