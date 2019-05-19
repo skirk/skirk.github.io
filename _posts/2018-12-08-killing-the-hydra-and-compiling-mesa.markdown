@@ -3,8 +3,10 @@ layout: post
 title: "Killing the hydra (and compiling mesa)"
 date: 2018-12-08 21:43
 comments: true
-tags: [mesa, linux]
+tags: [mesa, linux] 
 ---
+<span style="color:red"> Update 2019-05-18: Since this page was posted I've changed the setup quite a bit, I'm now using a setup more alike [this]({% post_url 2019-05-19-compiling-mesa-pt2%}) </span>
+
 
 Recently I took on the task to explore the graphics stack on linux. This post is about getting mesa up and running. As a kinetic learner the most fun kind of  exploration for me is to get my hands dirty by start changing and breaking things. In order to break stuff, the stuff needs to work first. 
 
@@ -47,3 +49,4 @@ See below for the code. If you decide to give it a spin and find some issues, pl
 
 
 [Mesa and it's dependencies](https://gitlab.com/skirk/mesa-dependencies/blob/master/CMakeLists.txt)
+
